@@ -31,7 +31,7 @@
 
         button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #00691e;
             color: white;
             border: none;
             cursor: pointer;
@@ -40,7 +40,7 @@
         }
 
         button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #00691e; /* Darker green on hover */
         }
     </style>
 </head>
@@ -303,6 +303,40 @@
                 <option value="Brookline Village">Brookline Village</option>
             </optgroup>
         </select>
-    </div>
-<button>Calculate Travel Time</button>
-</body> </html> ```
+       
+        <div>
+            <button onclick="calculateTravelTime()">Calculate Travel Time</button>
+            <p id="travelTimeResult"></p>
+        </div>
+    
+        <script>
+            // Example average travel times between some stops in minutes
+            const travelTimes = {
+                'Alewife': { 'Davis': 15, 'South Station': 35 },
+                'Davis': { 'Alewife': 15, 'South Station': 20 },
+                'South Station': { 'Alewife': 35, 'Davis': 20 },
+                // Add more travel times as necessary
+            };
+    
+            function calculateTravelTime() {
+                const startStop = document.getElementById('start').value;
+                const endStop = document.getElementById('end').value;
+                const resultElement = document.getElementById('travelTimeResult');
+    
+                // Check if both stops are selected
+                if (!startStop || !endStop) {
+                    resultElement.textContent = "Please select both starting and destination stops.";
+                    return;
+                }
+    
+                // Retrieve the travel time based on the selected stops
+                const travelTime = travelTimes[startStop]?.[endStop];
+    
+                if (travelTime !== undefined) {
+                    resultElement.textContent = `Estimated travel time from ${startStop} to ${endStop} is approximately ${travelTime} minutes.`;
+                } else {
+                    resultElement.textContent = "No travel time data available for the selected stops.";
+                }
+            }
+        </script>
+    
