@@ -10,12 +10,12 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #238748;
             color: #333;
         }
 
         header {
-            background-color: ##238748; /* Navy blue to represent Boston */
+            background-color: #238748;
             color: white;
             text-align: center;
             padding: 20px 0;
@@ -401,6 +401,29 @@
                 <option value="Brookline Village">Brookline Village</option>
             </optgroup>
         </select>
+
+        <button id="calculate-btn">Calculate Travel Time</button>
+        <p id="travel-time-result"></p>
     </div>
-<button>Calculate Travel Time</button>
-</body> </html> ```
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <p>Data sourced from <a href="https://www.mbta.com">MBTA</a>.</p>
+    </footer>
+
+    <script>
+        document.getElementById('calculate-btn').onclick = function() {
+            const startStop = document.getElementById('start').value;
+            const endStop = document.getElementById('end').value;
+
+            if (startStop && endStop) {
+                // For demonstration purposes, a fixed travel time is used. You can replace this with actual logic.
+                const travelTime = Math.floor(Math.random() * 30) + 1; // Random travel time between 1 and 30 minutes
+                document.getElementById('travel-time-result').innerText = `Estimated travel time from ${startStop} to ${endStop} is approximately ${travelTime} minutes.`;
+            } else {
+                document.getElementById('travel-time-result').innerText = 'Please select both starting and destination stops.';
+            }
+        };
+    </script>
+</body>
+</html>
