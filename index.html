@@ -3,146 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTA Travel Time</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>What's the Real Wait Time on the MBTA? A Commuter’s Dilemma</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Helvetica, sans-serif';
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
             color: #333;
-            overflow-x: hidden; /* Prevent horizontal overflow */
         }
-
         header {
-            background-color: #00691e; 
+            background-color: #007A33; /* Boston Green */
             color: white;
+            padding: 10px;
             text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
-        h1 {
-            margin: 0;
-            font-size: 2.8em;
-            letter-spacing: 2px;
-        }
-
-        nav {
-            background-color: #00691e; /* MBTA green */
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffcc00; /* Gold color for hover effect */
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            margin: auto;
+            padding: 20px;
         }
-
-        .container:hover {
-            transform: scale(1.02);
+        h2 {
+            color: #007A33;
         }
-
-        select, button {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
+        img {
+            width: 100%; /* Make the image responsive */
+            height: auto;
+            margin: 20px 0;
+        }
+        .text-block {
+            margin: 20px 0;
+        }
+        .dropdowns {
+            margin-top: 20px;
+            background: white;
+            padding: 10px;
             border: 1px solid #ccc;
-            font-size: 1.1em;
-            transition: border-color 0.3s;
         }
-
-        select:focus, button:focus {
-            border-color: #004B87; /* Navy blue on focus */
-            outline: none;
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
         }
-
         button {
-            background-color: #00691e;
+            padding: 10px;
+            background-color: #007A33;
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 1.1em;
-            margin-top: 20px;
-            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
         }
-
         button:hover {
-            background-color: #005e16; /* Darker green on hover */
-            transform: translateY(-2px);
+            background-color: #005B26;
         }
-
-        p {
-            line-height: 1.8;
-            margin: 20px 0;
-            font-size: 1.1em;
-            opacity: 0; /* Start hidden */
-            transform: translateY(20px); /* Slide in effect */
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth transition */
-        }
-
-        p.visible {
-            opacity: 1; /* Show text */
-            transform: translateY(0); /* Slide to original position */
-        }
-
         footer {
             text-align: center;
-            margin: 20px 0;
-            font-size: 0.9em;
-            color: #666;
+            padding: 20px;
+            background-color: #007A33;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>What's the Real Wait Time on the MBTA? A Commuter’s Dilemma</h1>
+    </header>
 
-        footer a {
-            color: #004B87;
-            text-decoration: none;
-        }
+    <div class="container">
+        <div class="text-block">
+            <h2>A Brief History of the Boston T</h2>
+            <p>The Massachusetts Bay Transportation Authority (MBTA), commonly referred to as the Boston T, has been an integral part of Boston's public transportation system since its inception in 1897. Originally established to provide efficient transit options, the T has evolved over the years to meet the growing needs of the city’s residents and visitors. Today, it serves millions of passengers annually, connecting neighborhoods and enhancing mobility in the Greater Boston area.</p>
+        </div>
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+        <img src="path/to/your/image.jpg" alt="Boston T Cars">
 
-        /* Responsive design */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
+        <div class="text-block">
+            <h2>Importance of a Reliable Train System</h2>
+            <p>A reliable train system is crucial for any city, facilitating economic growth, reducing traffic congestion, and promoting sustainable commuting options. In urban areas like Boston, where traffic can be a significant challenge, an efficient public transit system helps residents travel seamlessly, enhances accessibility to jobs and services, and supports environmental sustainability by reducing reliance on personal vehicles.</p>
+        </div>
 
-            .container {
-                padding: 20px;
-            }
-
-            select, button {
-                font-size: 1em;
-            }
+        <div class="text-block">
+            <h2>Calculating Average Arrival and Departure Times</h2>
+            <p>To better understand the reliability of the Boston T, we analyzed the average arrival and departure times over the last six months. This data provides valuable insights into actual travel times between various points on the T, allowing commuters to plan their journeys more effectively.</p>
+        </div>
         }
     </style>
 </head>
