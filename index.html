@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #f5f5f5;
             color: #333;
+            overflow-x: hidden; /* Prevent horizontal overflow */
         }
 
         header {
@@ -103,6 +104,14 @@
             line-height: 1.8;
             margin: 20px 0;
             font-size: 1.1em;
+            opacity: 0; /* Start hidden */
+            transform: translateY(20px); /* Slide in effect */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth transition */
+        }
+
+        p.visible {
+            opacity: 1; /* Show text */
+            transform: translateY(0); /* Slide to original position */
         }
 
         footer {
@@ -148,14 +157,7 @@
     <div class="container" id="travel-times">
         <img src="mbta_map.jpg" alt="MBTA Map">
 
-        <!-- Introduction paragraph -->
-        <p>
-            In a city where the MBTA schedule often feels more like wishful thinking than a guarantee, we’ve built this tool to answer the burning question on every Bostonian’s mind: "How long is this T ride actually going to take?" Forget the posted times — find out how long your trip from A to B really takes based on real averages from the past year, because let’s face it, in Boston, we’re all living on MBTA time.
-            <br><br>
-            Just enter your start and end points below, and we’ll give you the true travel time, delays included. Then, scroll down for a deeper dive into the data, where we break down MBTA trends and uncover the real story behind Boston’s infamous delays. Look further into the delay times behind your commute and get an in-depth analysis of wait times across the system.
-        </p>
-
-    <div>
+        <!-- Dropdowns for starting and destination stops -->
         <label for="start">Select Starting Stop:</label>
         <select id="start">
             <option value="">-- Select Starting Stop --</option>
@@ -223,80 +225,30 @@
                 <option value="Science Park/West End">Science Park/West End</option>
                 <option value="North Station">North Station</option>
                 <option value="Haymarket">Haymarket</option>
-                <option value="Government Center">Government Center</option>
                 <option value="Park St">Park St</option>
-                <option value="Boylston">Boylston</option>
-                <option value="Arlington">Arlington</option>
+                <option value="Government Center">Government Center</option>
                 <option value="Copley">Copley</option>
-            </optgroup>
-            <optgroup label="Green Line E">
-                <option value="Prudential">Prudential</option>
-                <option value="Symphony">Symphony</option>
-                <option value="Northeastern">Northeastern</option>
-                <option value="MFA">MFA</option>
-                <option value="Longwood Medical Area">Longwood Medical Area</option>
-                <option value="Brigham Circle">Brigham Circle</option>
-                <option value="Fenwood Rd">Fenwood Rd</option>
-                <option value="Mission Park">Mission Park</option>
-                <option value="Riverway">Riverway</option>
-                <option value="Back of the Hill">Back of the Hill</option>
-                <option value="Heath St">Heath St</option>
-            </optgroup>
-            <optgroup label="Green Line D">
                 <option value="Hynes Convention Center">Hynes Convention Center</option>
                 <option value="Kenmore">Kenmore</option>
-                <option value="Fenway">Fenway</option>
-                <option value="Longwood">Longwood</option>
-                <option value="Brookline Village">Brookline Village</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Beaconsfield">Beaconsfield</option>
-                <option value="Reservoir">Reservoir</option>
-                <option value="Chestnut Hill">Chestnut Hill</option>
-                <option value="Newton Centre">Newton Centre</option>
-                <option value="Newton Highlands">Newton Highlands</option>
-                <option value="Eliot">Eliot</option>
-                <option value="Waban">Waban</option>
-                <option value="Woodland">Woodland</option>
-                <option value="Riverside">Riverside</option>
-            </optgroup>
-            <optgroup label="Green Line C">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="St. Mary’s St">St. Mary’s St</option>
-                <option value="Hawes St">Hawes St</option>
-                <option value="Kent St">Kent St</option>
-                <option value="St. Paul St">St. Paul St</option>
-                <option value="Coolidge Corner">Coolidge Corner</option>
-                <option value="Summit Ave">Summit Ave</option>
-                <option value="Brandon Hall">Brandon Hall</option>
-                <option value="Fairbanks St">Fairbanks St</option>
-                <option value="Washington Sq">Washington Sq</option>
-                <option value="Tappan St">Tappan St</option>
-                <option value="Dean Rd">Dean Rd</option>
-                <option value="Englewood Ave">Englewood Ave</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Brookline Village">Brookline Village</option>
             </optgroup>
             <optgroup label="Blue Line">
+                <option value="Wonderland">Wonderland</option>
+                <option value="Revere Beach">Revere Beach</option>
+                <option value="Beachmont">Beachmont</option>
+                <option value="Suffolk Downs">Suffolk Downs</option>
+                <option value="Orient Heights">Orient Heights</option>
+                <option value="Shirley Ave">Shirley Ave</option>
                 <option value="Bowdoin">Bowdoin</option>
                 <option value="Government Center">Government Center</option>
                 <option value="State">State</option>
-                <option value="Aquarium">Aquarium</option>
-                <option value="Maverick">Maverick</option>
-                <option value="Airport">Airport</option>
-                <option value="Wood Island">Wood Island</option>
-                <option value="Orient Heights">Orient Heights</option>
-                <option value="Suffolk Downs">Suffolk Downs</option>
-                <option value="Beachmont">Beachmont</option>
-                <option value="Revere Beach">Revere Beach</option>
-                <option value="Wonderland">Wonderland</option>
+                <option value="Haymarket">Haymarket</option>
+                <option value="North Station">North Station</option>
             </optgroup>
         </select>
-   
-    </div>
-        <label for="end">Select Destination Stop:</label>
-        <select id="end">
-            <option value="">-- Select Destination Stop --</option> 
+
+        <label for="destination">Select Destination Stop:</label>
+        <select id="destination">
+            <option value="">-- Select Destination Stop --</option>
             <optgroup label="Red Line">
                 <option value="Alewife">Alewife</option>
                 <option value="Davis">Davis</option>
@@ -361,111 +313,82 @@
                 <option value="Science Park/West End">Science Park/West End</option>
                 <option value="North Station">North Station</option>
                 <option value="Haymarket">Haymarket</option>
-                <option value="Government Center">Government Center</option>
                 <option value="Park St">Park St</option>
-                <option value="Boylston">Boylston</option>
-                <option value="Arlington">Arlington</option>
+                <option value="Government Center">Government Center</option>
                 <option value="Copley">Copley</option>
-            </optgroup>
-            <optgroup label="Green Line E">
-                <option value="Prudential">Prudential</option>
-                <option value="Symphony">Symphony</option>
-                <option value="Northeastern">Northeastern</option>
-                <option value="MFA">MFA</option>
-                <option value="Longwood Medical Area">Longwood Medical Area</option>
-                <option value="Brigham Circle">Brigham Circle</option>
-                <option value="Fenwood Rd">Fenwood Rd</option>
-                <option value="Mission Park">Mission Park</option>
-                <option value="Riverway">Riverway</option>
-                <option value="Back of the Hill">Back of the Hill</option>
-                <option value="Heath St">Heath St</option>
-            </optgroup>
-            <optgroup label="Green Line D">
                 <option value="Hynes Convention Center">Hynes Convention Center</option>
                 <option value="Kenmore">Kenmore</option>
-                <option value="Fenway">Fenway</option>
-                <option value="Longwood">Longwood</option>
-                <option value="Brookline Village">Brookline Village</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Beaconsfield">Beaconsfield</option>
-                <option value="Reservoir">Reservoir</option>
-                <option value="Chestnut Hill">Chestnut Hill</option>
-                <option value="Newton Centre">Newton Centre</option>
-                <option value="Newton Highlands">Newton Highlands</option>
-                <option value="Eliot">Eliot</option>
-                <option value="Waban">Waban</option>
-                <option value="Woodland">Woodland</option>
-                <option value="Riverside">Riverside</option>
-            </optgroup>
-            <optgroup label="Green Line C">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="St. Mary’s St">St. Mary’s St</option>
-                <option value="Hawes St">Hawes St</option>
-                <option value="Kent St">Kent St</option>
-                <option value="St. Paul St">St. Paul St</option>
-                <option value="Coolidge Corner">Coolidge Corner</option>
-                <option value="Summit Ave">Summit Ave</option>
-                <option value="Brandon Hall">Brandon Hall</option>
-                <option value="Fairbanks St">Fairbanks St</option>
-                <option value="Washington Sq">Washington Sq</option>
-                <option value="Tappan St">Tappan St</option>
-                <option value="Dean Rd">Dean Rd</option>
-                <option value="Englewood Ave">Englewood Ave</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Brookline Village">Brookline Village</option>
             </optgroup>
             <optgroup label="Blue Line">
+                <option value="Wonderland">Wonderland</option>
+                <option value="Revere Beach">Revere Beach</option>
+                <option value="Beachmont">Beachmont</option>
+                <option value="Suffolk Downs">Suffolk Downs</option>
+                <option value="Orient Heights">Orient Heights</option>
+                <option value="Shirley Ave">Shirley Ave</option>
                 <option value="Bowdoin">Bowdoin</option>
                 <option value="Government Center">Government Center</option>
                 <option value="State">State</option>
-                <option value="Aquarium">Aquarium</option>
-                <option value="Maverick">Maverick</option>
-                <option value="Airport">Airport</option>
-                <option value="Wood Island">Wood Island</option>
-                <option value="Orient Heights">Orient Heights</option>
-                <option value="Suffolk Downs">Suffolk Downs</option>
-                <option value="Beachmont">Beachmont</option>
-                <option value="Revere Beach">Revere Beach</option>
-                <option value="Wonderland">Wonderland</option>
+                <option value="Haymarket">Haymarket</option>
+                <option value="North Station">North Station</option>
             </optgroup>
         </select>
-       
-        <div>
-            <button onclick="calculateTravelTime()">Calculate Travel Time</button>
-            <p id="travelTimeResult"></p>
-        </div>
-    
-        <script>
-            // Example average travel times between some stops in minutes
-            const travelTimes = {
-                'Alewife': { 'Davis': 15, 'South Station': 35 },
-                'Davis': { 'Alewife': 15, 'South Station': 20 },
-                'South Station': { 'Alewife': 35, 'Davis': 20 },
-                // Add more travel times as necessary
-            };
-    
-            function calculateTravelTime() {
-                const startStop = document.getElementById('start').value;
-                const endStop = document.getElementById('end').value;
-                const resultElement = document.getElementById('travelTimeResult');
-    
-                // Check if both stops are selected
-                if (!startStop || !endStop) {
-                    resultElement.textContent = "Please select both starting and destination stops.";
-                    return;
-                }
-    
-                // Retrieve the travel time based on the selected stops
-                const travelTime = travelTimes[startStop]?.[endStop];
-    
-                if (travelTime !== undefined) {
-                    resultElement.textContent = `Estimated travel time from ${startStop} to ${endStop} is approximately ${travelTime} minutes.`;
-                } else {
-                    resultElement.textContent = "No travel time data available for the selected stops.";
-                }
+
+        <button onclick="calculateTravelTime()">Calculate Travel Time</button>
+
+        <p id="result"></p>
+    </div>
+
+    <div class="container" id="data-analysis">
+        <h2>Data Analysis</h2>
+        <p class="analysis-text">Exploring the travel times on the MBTA helps us understand the efficiency of our public transit system.</p>
+        <p class="analysis-text">Long wait times can significantly affect commuters' daily lives, highlighting the need for continuous improvements.</p>
+        <p class="analysis-text">The data also reveals patterns that can inform future transit developments and initiatives.</p>
+        <p class="analysis-text">Ultimately, effective communication about travel times and service updates is essential for public confidence in the system.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 MBTA Travel Time Project. All rights reserved. <a href="https://www.mbta.com/" target="_blank">Visit MBTA</a></p>
+    </footer>
+
+    <script>
+        function calculateTravelTime() {
+            const start = document.getElementById('start').value;
+            const destination = document.getElementById('destination').value;
+            const result = document.getElementById('result');
+
+            if (start === "" || destination === "") {
+                result.textContent = "Please select both a starting and destination stop.";
+                return;
             }
-        </script>
+
+            // Mock calculation (You can replace this logic with actual data)
+            const travelTime = Math.floor(Math.random() * 30) + 10; // Random time between 10 and 40 minutes
+            result.textContent = `The estimated travel time from ${start} to ${destination} is approximately ${travelTime} minutes.`;
+
+            // Show analysis text when travel time is calculated
+            const analysisTexts = document.querySelectorAll('.analysis-text');
+            analysisTexts.forEach((text, index) => {
+                setTimeout(() => {
+                    text.classList.add('visible');
+                }, index * 500); // Staggered display of analysis texts
+            });
+        }
+
+        // Reveal analysis text on scroll
+        window.addEventListener('scroll', () => {
+            const analysisTexts = document.querySelectorAll('.analysis-text');
+            analysisTexts.forEach(text => {
+                const rect = text.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    text.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
     
       
       
