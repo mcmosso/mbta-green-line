@@ -3,427 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTA Travel Time</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #238748;
-            color: #333;
-        }
-
-        header {
-            background-color: #238748;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2.8em;
-            letter-spacing: 2px;
-        }
-
-        nav {
-            background-color: #00691e; /* MBTA green */
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffcc00; /* Gold color for hover effect */
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .container:hover {
-            transform: scale(1.02);
-        }
-
-        select, button {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 1.1em;
-            transition: border-color 0.3s;
-        }
-
-        select:focus, button:focus {
-            border-color: #004B87; /* Navy blue on focus */
-            outline: none;
-        }
-
-        button {
-            background-color: #00691e;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            margin-top: 20px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        button:hover {
-            background-color: #005e16; /* Darker green on hover */
-            transform: translateY(-2px);
-        }
-
-        p {
-            line-height: 1.8;
-            margin: 20px 0;
-            font-size: 1.1em;
-        }
-
-        footer {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        footer a {
-            color: #004B87;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive design */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .container {
-                padding: 20px;
-            }
-
-            select, button {
-                font-size: 1em;
-            }
-        }
-    </style>
+    <title>MBTA Green Line: On-Time Performance</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Why Are We Still Waiting? The Real MBTA Commute Times</h1>
+        <h1>MBTA Green Line: A Tale of Timeliness</h1>
     </header>
-    <nav>
-        <a href="#travel-times">Travel Times</a>
-        <a href="#data-analysis">Data Analysis</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="container" id="travel-times">
-        <img src="mbta_map.jpg" alt="MBTA Map">
 
-        <!-- Introduction paragraph -->
-        <p>
-            In a city where the MBTA schedule often feels more like wishful thinking than a guarantee, we’ve built this tool to answer the burning question on every Bostonian’s mind: "How long is this T ride actually going to take?" Forget the posted times — find out how long your trip from A to B really takes based on real averages from the past year, because let’s face it, in Boston, we’re all living on MBTA time.
-            <br><br>
-            Just enter your start and end points below, and we’ll give you the true travel time, delays included. Then, scroll down for a deeper dive into the data, where we break down MBTA trends and uncover the real story behind Boston’s infamous delays. Look further into the delay times behind your commute and get an in-depth analysis of wait times across the system.
-        </p>
-        <label for="start">Select Starting Stop:</label>
-        <select id="start">
-            <option value="">-- Select Starting Stop --</option>
-            <optgroup label="Red Line">
-                <option value="Alewife">Alewife</option>
-                <option value="Davis">Davis</option>
-                <option value="Porter">Porter</option>
-                <option value="Harvard">Harvard</option>
-                <option value="Central">Central</option>
-                <option value="Kendall/MIT">Kendall/MIT</option>
-                <option value="Charles/MGH">Charles/MGH</option>
-                <option value="Park St">Park St</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="South Station">South Station</option>
-                <option value="Broadway">Broadway</option>
-                <option value="Andrew">Andrew</option>
-                <option value="JFK/UMASS">JFK/UMASS</option>
-                <option value="Savin Hill">Savin Hill</option>
-                <option value="Fields Corner">Fields Corner</option>
-                <option value="Shawmut">Shawmut</option>
-                <option value="Ashmont">Ashmont</option>
-                <option value="Cedar Grove">Cedar Grove</option>
-                <option value="Butler">Butler</option>
-                <option value="Milton">Milton</option>
-                <option value="Central Ave">Central Ave</option>
-                <option value="Valley Rd">Valley Rd</option>
-                <option value="Capen St">Capen St</option>
-                <option value="Mattapan">Mattapan</option>
-                <option value="North Quincy">North Quincy</option>
-                <option value="Wollaston">Wollaston</option>
-                <option value="Quincy">Quincy</option>
-                <option value="Quincy Adams">Quincy Adams</option>
-                <option value="Braintree">Braintree</option>
-            </optgroup>
-            <optgroup label="Orange Line">
-                <option value="Forest Hills">Forest Hills</option>
-                <option value="Green St">Green St</option>
-                <option value="Stony Brook">Stony Brook</option>
-                <option value="Jackson Sq">Jackson Sq</option>
-                <option value="Roxbury Crossing">Roxbury Crossing</option>
-                <option value="Ruggles">Ruggles</option>
-                <option value="Mass. Ave">Mass. Ave</option>
-                <option value="Back Bay">Back Bay</option>
-                <option value="Tufts Medical Center">Tufts Medical Center</option>
-                <option value="Chinatown">Chinatown</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="State">State</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="North Station">North Station</option>
-                <option value="Community College">Community College</option>
-                <option value="Sullivan Sq">Sullivan Sq</option>
-                <option value="Assembly">Assembly</option>
-                <option value="Wellington">Wellington</option>
-                <option value="Malden Center">Malden Center</option>
-                <option value="Oak Grove">Oak Grove</option>
-            </optgroup>
-            <optgroup label="Green Line">
-                <option value="Medford/Tufts">Medford/Tufts</option>
-                <option value="Ball Sq">Ball Sq</option>
-                <option value="Magoun Sq">Magoun Sq</option>
-                <option value="Gilman Sq">Gilman Sq</option>
-                <option value="East Somerville">East Somerville</option>
-                <option value="Union Sq">Union Sq</option>
-                <option value="Lechmere">Lechmere</option>
-                <option value="Science Park/West End">Science Park/West End</option>
-                <option value="North Station">North Station</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="Government Center">Government Center</option>
-                <option value="Park St">Park St</option>
-                <option value="Boylston">Boylston</option>
-                <option value="Arlington">Arlington</option>
-                <option value="Copley">Copley</option>
-            </optgroup>
-            <optgroup label="Green Line E">
-                <option value="Prudential">Prudential</option>
-                <option value="Symphony">Symphony</option>
-                <option value="Northeastern">Northeastern</option>
-                <option value="MFA">MFA</option>
-                <option value="Longwood Medical Area">Longwood Medical Area</option>
-                <option value="Brigham Circle">Brigham Circle</option>
-                <option value="Fenwood Rd">Fenwood Rd</option>
-                <option value="Mission Park">Mission Park</option>
-                <option value="Riverway">Riverway</option>
-                <option value="Back of the Hill">Back of the Hill</option>
-                <option value="Heath St">Heath St</option>
-            </optgroup>
-            <optgroup label="Green Line D">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="Fenway">Fenway</option>
-                <option value="Longwood">Longwood</option>
-                <option value="Brookline Village">Brookline Village</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Beaconsfield">Beaconsfield</option>
-                <option value="Reservoir">Reservoir</option>
-                <option value="Chestnut Hill">Chestnut Hill</option>
-                <option value="Newton Centre">Newton Centre</option>
-                <option value="Newton Highlands">Newton Highlands</option>
-                <option value="Eliot">Eliot</option>
-                <option value="Waban">Waban</option>
-                <option value="Woodland">Woodland</option>
-                <option value="Riverside">Riverside</option>
-            </optgroup>
-            <optgroup label="Green Line C">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="St. Mary’s St">St. Mary’s St</option>
-                <option value="Hawes St">Hawes St</option>
-                <option value="Kent St">Kent St</option>
-                <option value="St. Paul St">St. Paul St</option>
-                <option value="Coolidge Corner">Coolidge Corner</option>
-                <option value="Summit Ave">Summit Ave</option>
-                <option value="Brandon Hall">Brandon Hall</option>
-                <option value="Fairbanks St">Fairbanks St</option>
-                <option value="Washington Sq">Washington Sq</option>
-                <option value="Tappan St">Tappan St</option>
-                <option value="Dean Rd">Dean Rd</option>
-                <option value="Englewood Ave">Englewood Ave</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Brookline Village">Brookline Village</option>
-            </optgroup>
-        </select>
-   
-    </div>
-        <label for="end">Select Destination Stop:</label>
-        <select id="end">
-            <option value="">-- Select Destination Stop --</option> 
-            <optgroup label="Red Line">
-                <option value="Alewife">Alewife</option>
-                <option value="Davis">Davis</option>
-                <option value="Porter">Porter</option>
-                <option value="Harvard">Harvard</option>
-                <option value="Central">Central</option>
-                <option value="Kendall/MIT">Kendall/MIT</option>
-                <option value="Charles/MGH">Charles/MGH</option>
-                <option value="Park St">Park St</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="South Station">South Station</option>
-                <option value="Broadway">Broadway</option>
-                <option value="Andrew">Andrew</option>
-                <option value="JFK/UMASS">JFK/UMASS</option>
-                <option value="Savin Hill">Savin Hill</option>
-                <option value="Fields Corner">Fields Corner</option>
-                <option value="Shawmut">Shawmut</option>
-                <option value="Ashmont">Ashmont</option>
-                <option value="Cedar Grove">Cedar Grove</option>
-                <option value="Butler">Butler</option>
-                <option value="Milton">Milton</option>
-                <option value="Central Ave">Central Ave</option>
-                <option value="Valley Rd">Valley Rd</option>
-                <option value="Capen St">Capen St</option>
-                <option value="Mattapan">Mattapan</option>
-                <option value="North Quincy">North Quincy</option>
-                <option value="Wollaston">Wollaston</option>
-                <option value="Quincy">Quincy</option>
-                <option value="Quincy Adams">Quincy Adams</option>
-                <option value="Braintree">Braintree</option>
-            </optgroup>
-            <optgroup label="Orange Line">
-                <option value="Forest Hills">Forest Hills</option>
-                <option value="Green St">Green St</option>
-                <option value="Stony Brook">Stony Brook</option>
-                <option value="Jackson Sq">Jackson Sq</option>
-                <option value="Roxbury Crossing">Roxbury Crossing</option>
-                <option value="Ruggles">Ruggles</option>
-                <option value="Mass. Ave">Mass. Ave</option>
-                <option value="Back Bay">Back Bay</option>
-                <option value="Tufts Medical Center">Tufts Medical Center</option>
-                <option value="Chinatown">Chinatown</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="State">State</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="North Station">North Station</option>
-                <option value="Community College">Community College</option>
-                <option value="Sullivan Sq">Sullivan Sq</option>
-                <option value="Assembly">Assembly</option>
-                <option value="Wellington">Wellington</option>
-                <option value="Malden Center">Malden Center</option>
-                <option value="Oak Grove">Oak Grove</option>
-            </optgroup>
-            <optgroup label="Green Line">
-                <option value="Medford/Tufts">Medford/Tufts</option>
-                <option value="Ball Sq">Ball Sq</option>
-                <option value="Magoun Sq">Magoun Sq</option>
-                <option value="Gilman Sq">Gilman Sq</option>
-                <option value="East Somerville">East Somerville</option>
-                <option value="Union Sq">Union Sq</option>
-                <option value="Lechmere">Lechmere</option>
-                <option value="Science Park/West End">Science Park/West End</option>
-                <option value="North Station">North Station</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="Government Center">Government Center</option>
-                <option value="Park St">Park St</option>
-                <option value="Boylston">Boylston</option>
-                <option value="Arlington">Arlington</option>
-                <option value="Copley">Copley</option>
-            </optgroup>
-            <optgroup label="Green Line E">
-                <option value="Prudential">Prudential</option>
-                <option value="Symphony">Symphony</option>
-                <option value="Northeastern">Northeastern</option>
-                <option value="MFA">MFA</option>
-                <option value="Longwood Medical Area">Longwood Medical Area</option>
-                <option value="Brigham Circle">Brigham Circle</option>
-                <option value="Fenwood Rd">Fenwood Rd</option>
-                <option value="Mission Park">Mission Park</option>
-                <option value="Riverway">Riverway</option>
-                <option value="Back of the Hill">Back of the Hill</option>
-                <option value="Heath St">Heath St</option>
-            </optgroup>
-            <optgroup label="Green Line D">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="Fenway">Fenway</option>
-                <option value="Longwood">Longwood</option>
-                <option value="Brookline Village">Brookline Village</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Beaconsfield">Beaconsfield</option>
-                <option value="Reservoir">Reservoir</option>
-                <option value="Chestnut Hill">Chestnut Hill</option>
-                <option value="Newton Centre">Newton Centre</option>
-                <option value="Newton Highlands">Newton Highlands</option>
-                <option value="Eliot">Eliot</option>
-                <option value="Waban">Waban</option>
-                <option value="Woodland">Woodland</option>
-                <option value="Riverside">Riverside</option>
-            </optgroup>
-            <optgroup label="Green Line C">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="St. Mary’s St">St. Mary’s St</option>
-                <option value="Hawes St">Hawes St</option>
-                <option value="Kent St">Kent St</option>
-                <option value="St. Paul St">St. Paul St</option>
-                <option value="Coolidge Corner">Coolidge Corner</option>
-                <option value="Summit Ave">Summit Ave</option>
-                <option value="Brandon Hall">Brandon Hall</option>
-                <option value="Fairbanks St">Fairbanks St</option>
-                <option value="Washington Sq">Washington Sq</option>
-                <option value="Tappan St">Tappan St</option>
-                <option value="Dean Rd">Dean Rd</option>
-                <option value="Englewood Ave">Englewood Ave</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Brookline Village">Brookline Village</option>
-            </optgroup>
-        </select>
+    <main>
+        <section id="intro" class="fullscreen">
+            <h2>How often is the MBTA green line on time?</h2>
+            <p>Scroll to explore the data story</p>
+        </section>
 
-        <button id="calculate-btn">Calculate Travel Time</button>
-        <p id="travel-time-result"></p>
-    </div>
+        <section id="visualization1" class="scrolly-section">
+            <div class="sticky-graphic">
+                <!-- Your main visualization will go here -->
+            </div>
+            <article>
+                <div class="step" data-step="1">
+                    <p>First insight about MBTA green line timeliness</p>
+                </div>
+                <div class="step" data-step="2">
+                    <p>Second insight about MBTA green line timeliness</p>
+                </div>
+                <!-- Add more steps as needed -->
+            </article>
+        </section>
+
+        <section id="analysis1" class="fullscreen">
+            <h2>Key Findings</h2>
+            <p>Summary of the main insights from the data</p>
+        </section>
+
+        <!-- Add more sections as needed -->
+    </main>
 
     <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
-        <p>Data sourced from <a href="https://www.mbta.com">MBTA</a>.</p>
+        <p>Data source: MBTA | Created by: Your Name</p>
     </footer>
 
-    <script>
-        document.getElementById('calculate-btn').onclick = function() {
-            const startStop = document.getElementById('start').value;
-            const endStop = document.getElementById('end').value;
-
-            if (startStop && endStop) {
-                // For demonstration purposes, a fixed travel time is used. You can replace this with actual logic.
-                const travelTime = Math.floor(Math.random() * 30) + 1; // Random travel time between 1 and 30 minutes
-                document.getElementById('travel-time-result').innerText = `Estimated travel time from ${startStop} to ${endStop} is approximately ${travelTime} minutes.`;
-            } else {
-                document.getElementById('travel-time-result').innerText = 'Please select both starting and destination stops.';
-            }
-        };
-    </script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/intersection-observer"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <script src="script.js"></script>
 </body>
 </html>
