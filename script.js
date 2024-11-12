@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const boxes = document.querySelectorAll('.text-box');
     const canvas = document.getElementById('dotCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -9,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dot properties
     const dots = [];
-    const numDots = 100;
-    const dotSize = 5;
-    const dotSpeed = 0.5;
+    const numDots = 150;
+    const dotSize = 3;
+    const dotSpeed = 0.3;
 
     // Create dots
     for (let i = 0; i < numDots; i++) {
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Draw dot
             ctx.beginPath();
             ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
             ctx.fill();
         });
 
@@ -48,19 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animate();
 
-    // Scroll event listener
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
+    // GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
 
-        boxes.forEach(box => {
-            const boxTop = box.offsetTop;
-            const boxHeight = box.offsetHeight;
-
-            if (scrollPosition > boxTop - window.innerHeight / 2 &&
-                scrollPosition < boxTop + boxHeight - window.innerHeight / 2) {
-                box.style.opacity = '1';
-            } else {
-                box.style.opacity = '0';
+    gsap.utils.toArray('.text-section').forEach((section, i) => {
+        ScrollTrigger.create({
+            trigger: section,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: () => {
+                gsap.to(section.querySelector('.text-box'), {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5
+                });
+            },
+            onLeaveBack: () => {
+                gsap.to(section.querySelector('.text-box'), {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5
+                });
             }
         });
     });
