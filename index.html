@@ -3,32 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTA Visualization</title>
+    <title>MBTA Green Line Visualization</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
+        <section class="intro">
+            <h1>The Green Line: Boston's Lifeline</h1>
+            <p>Scroll to explore the history and importance of America's oldest subway line.</p>
+        </section>
+        
+        <section class="visualization">
+            <canvas id="mapCanvas"></canvas>
+            <div class="info-box" id="infoBox">
+                <h2>Green Line Facts</h2>
+                <p id="infoText"></p>
+            </div>
+        </section>
+        
         <section class="text-section" id="section1">
             <div class="text-box">
-                <h2>The MBTA: America's Oldest Subway</h2>
-                <p>The MBTA is the oldest subway system in the United States that is still in use.</p>
+                <h2>A Historic Journey</h2>
+                <p>The Green Line, opened in 1897, is not just a transit system; it's a piece of living history. As America's oldest subway, it has been the backbone of Boston's public transportation for over a century.</p>
             </div>
         </section>
+        
         <section class="text-section" id="section2">
             <div class="text-box">
-                <h2>A Question of Age</h2>
-                <p>Can riders tell?</p>
+                <h2>Connecting Communities</h2>
+                <p>With its extensive network of branches, the Green Line serves diverse neighborhoods, from bustling downtown areas to residential suburbs, fostering community connections and urban development.</p>
             </div>
         </section>
+        
         <section class="text-section" id="section3">
             <div class="text-box">
-                <h2>Ridership in Numbers</h2>
-                <p>According to the MBTA, in September 2024, the average weekly ridership for the T was 405,703 passengers.</p>
+                <h2>Environmental Impact</h2>
+                <p>By providing efficient public transportation, the Green Line plays a crucial role in reducing carbon emissions and promoting sustainable urban mobility in the Greater Boston area.</p>
             </div>
         </section>
     </div>
-    <canvas id="dotCanvas"></canvas>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
