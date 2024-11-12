@@ -1,66 +1,67 @@
-// Initialize scrollama
-const scroller = scrollama();
+document.addEventListener('DOMContentLoaded', () => {
+    const boxes = document.querySelectorAll('.text-box');
+    const canvas = document.getElementById('dotCanvas');
+    const ctx = canvas.getContext('2d');
 
-// Generic window resize listener event
-function handleResize() {
-    scroller.resize();
-}
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-// Scrollama event handlers
-function handleStepEnter(response) {
-    // response = { element, direction, index }
-    console.log(response);
-    // Add your update logic here
-    response.element.classList.add('is-active');
+    // Dot properties
+    const dots = [];
+    const numDots = 100;
+    const dotSize = 5;
+    const dotSpeed = 0.5;
 
-    // Update visualization based on step
-    updateVisualization(response.index);
-}
+    // Create dots
+    for (let i = 0; i < numDots; i++) {
+        dots.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * dotSpeed,
+            vy: (Math.random() - 0.5) * dotSpeed
+        });
+    }
 
-function handleStepExit(response) {
-    // response = { element, direction, index }
-    console.log(response);
-    response.element.classList.remove('is-active');
-}
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-function setupStickyfill() {
-    d3.selectAll('.sticky').each(function() {
-        Stickyfill.add(this);
+        dots.forEach(dot => {
+            // Move dot
+            dot.x += dot.vx;
+            dot.y += dot.vy;
+
+            // Bounce off edges
+            if (dot.x < 0 || dot.x > canvas.width) dot.vx *= -1;
+            if (dot.y < 0 || dot.y > canvas.height) dot.vy *= -1;
+
+            // Draw dot
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, dotSize, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Scroll event listener
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+
+        boxes.forEach(box => {
+            const boxTop = box.offsetTop;
+            const boxHeight = box.offsetHeight;
+
+            if (scrollPosition > boxTop - window.innerHeight / 2 &&
+                scrollPosition < boxTop + boxHeight - window.innerHeight / 2) {
+                box.style.opacity = '1';
+            } else {
+                box.style.opacity = '0';
+            }
+        });
     });
-}
-
-function init() {
-    setupStickyfill();
-
-    // Set up visualization
-    setupVisualization();
-
-    // 1. Setup the scroller passing options
-    // This will also initialize trigger observations
-    // 2. Bind scrollama event handlers (this can be chained like below)
-    scroller
-        .setup({
-            step: '#scrolly article .step',
-            offset: 0.5,
-            debug: false,
-        })
-        .onStepEnter(handleStepEnter)
-        .onStepExit(handleStepExit);
-
-    // 3. Setup resize event
-    window.addEventListener('resize', handleResize);
-}
-
-// Visualization functions
-function setupVisualization() {
-    // Set up your main visualization here
-    console.log('Setting up visualization');
-}
-
-function updateVisualization(index) {
-    // Update your visualization based on the current step
-    console.log('Updating visualization for step', index);
-}
-
-// Kick things off
-init();
+});
