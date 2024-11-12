@@ -7,30 +7,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>MBTA Green Line: A Tale of Timeliness</h1>
-    </header>
-
     <main>
-        <section id="intro">
-            <h2>How often is the MBTA green line on time?</h2>
+        <section id="intro" class="full-height">
+            <h1>MBTA Green Line: A Tale of Timeliness</h1>
             <p>Scroll to explore the data story</p>
         </section>
 
-        <section id="visualization">
-            <!-- Your visualizations will go here -->
+        <section id="scrolly">
+            <article>
+                <div class="step" data-step="1">
+                    <p>First insight about MBTA green line timeliness</p>
+                </div>
+                <div class="step" data-step="2">
+                    <p>Second insight about MBTA green line timeliness</p>
+                </div>
+                <div class="step" data-step="3">
+                    <p>Third insight about MBTA green line timeliness</p>
+                </div>
+                <!-- Add more steps as needed -->
+            </article>
+
+            <div class="sticky-thing">
+                <!-- Your main visualization will go here -->
+            </div>
         </section>
 
-        <section id="analysis">
+        <section id="outro" class="full-height">
             <h2>Key Findings</h2>
             <p>Summary of the main insights from the data</p>
         </section>
     </main>
 
-    <footer>
-        <p>Data source: MBTA | Created by: Your Name</p>
-    </footer>
-
+    <script src="https://unpkg.com/intersection-observer"></script>
+    <script src="https://unpkg.com/scrollama"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="script.js"></script>
 </body>
