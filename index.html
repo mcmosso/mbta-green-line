@@ -3,43 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTA Green Line: On-Time Performance</title>
+    <title>MBTA Visualization</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main>
-        <section id="scrolly">
-            <article>
-                <div class="step" data-step="1">
-                    <h1>MBTA Green Line: A Tale of Timeliness</h1>
-                    <img src="images/GreenLineMap-2023.png" alt="MBTA Green Line Map" class="step-image">
-                    <p>How often is the MBTA green line on time?</p>
-                </div>
-                <div class="step" data-step="2">
-                    <h2>On-Time Performance Overview</h2>
-                    <p>First insight about MBTA green line timeliness.</p>
-                </div>
-                <div class="step" data-step="3">
-                    <h2>Monthly Trends</h2>
-                    <p>Second insight about MBTA green line timeliness.</p>
-                </div>
-                <!-- Add more steps as needed -->
-            </article>
-
-            <div class="sticky-thing">
-                <!-- Your main visualization will go here -->
-            </div>
-        </section>
-
-        <section id="outro" class="full-height">
-            <h2>Key Findings</h2>
-            <p>Summary of the main insights from the data.</p>
-        </section>
-    </main>
-
-    <script src="https://unpkg.com/intersection-observer"></script>
-    <script src="https://unpkg.com/scrollama"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <div class="container">
+        <div class="text-box" id="box1">
+            <p>The MBTA is the oldest subway system in the United States that is still in use.</p>
+        </div>
+        <div class="text-box" id="box2">
+            <p>Can riders tell?</p>
+        </div>
+        <div class="text-box" id="box3">
+            <p>According to the MBTA, in September 2024, the average weekly ridership for the T was 405,703 passengers.</p>
+        </div>
+    </div>
+    <canvas id="dotCanvas"></canvas>
     <script src="script.js"></script>
 </body>
 </html>
