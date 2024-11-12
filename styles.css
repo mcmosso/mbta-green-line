@@ -1,16 +1,55 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
     font-family: 'Roboto', sans-serif;
-    background-color: #00a86b;
+    background-color: #f0f0f0;
     color: #333;
+    overflow-x: hidden;
 }
 
 .container {
-    position: relative;
     width: 100%;
-    min-height: 300vh;
+}
+
+.intro {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #00843D;
+    color: white;
+}
+
+.intro h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.visualization {
+    position: relative;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#mapCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.info-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .text-section {
@@ -18,6 +57,7 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 20px;
 }
 
 .text-box {
@@ -33,6 +73,7 @@ body, html {
 }
 
 .text-box h2 {
+    color: #00843D;
     margin-top: 0;
     font-size: 28px;
     margin-bottom: 20px;
@@ -41,14 +82,4 @@ body, html {
 .text-box p {
     font-size: 18px;
     line-height: 1.6;
-}
-
-#dotCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
 }
