@@ -4,305 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBTA Travel Time</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #ffffff;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        img {
-            max-width: 100%; /* Ensures the image fits the width of its container */
-            height: auto;    /* Maintains the aspect ratio */
-            display: block;  /* Centers the image block */
-            margin: 0 auto;  /* Center the image */
-        }
-
-        select {
-            width: 100%; /* Full width for dropdowns */
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #238748;
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: block;
-            margin: 20px auto;
-        }
-
-        button:hover {
-            background-color: #00ad3f; /* Darker blue on hover */
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Why Are We Still Waiting? The Real MBTA Commute Times</h1>
-    <img src="mbta_map.jpg" alt="MBTA Map">
+    <h1>The Green Line’s Breaking Point: What September Reveals About Boston’s Transit Failures</h1>
+    <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
 
-<!-- Introduction paragraph -->
-<p>
-    In a city where the MBTA schedule often feels more like wishful thinking than a guarantee, we’ve built this tool to answer the burning question on every Bostonian’s mind: "How long is this T ride actually going to take?" Forget the posted times — find out how long your trip from A to B really takes based on real averages from the past year, because let’s face it, in Boston, we’re all living on MBTA time.
-
-    Just enter your start and end points below, and we’ll give you the true travel time, delays included. Then, scroll down for a deeper dive into the data, where we break down MBTA trends and uncover the real story behind Boston’s infamous delays. Look further into the delay times behind your commute and get an in-depth analysis of wait times across the system.
-
-</p>
-
-    <div>
-        <label for="start">Select Starting Stop:</label>
-        <select id="start">
-            <option value="">-- Select Starting Stop --</option>
-            <optgroup label="Red Line">
-                <option value="Alewife">Alewife</option>
-                <option value="Davis">Davis</option>
-                <option value="Porter">Porter</option>
-                <option value="Harvard">Harvard</option>
-                <option value="Central">Central</option>
-                <option value="Kendall/MIT">Kendall/MIT</option>
-                <option value="Charles/MGH">Charles/MGH</option>
-                <option value="Park St">Park St</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="South Station">South Station</option>
-                <option value="Broadway">Broadway</option>
-                <option value="Andrew">Andrew</option>
-                <option value="JFK/UMASS">JFK/UMASS</option>
-                <option value="Savin Hill">Savin Hill</option>
-                <option value="Fields Corner">Fields Corner</option>
-                <option value="Shawmut">Shawmut</option>
-                <option value="Ashmont">Ashmont</option>
-                <option value="Cedar Grove">Cedar Grove</option>
-                <option value="Butler">Butler</option>
-                <option value="Milton">Milton</option>
-                <option value="Central Ave">Central Ave</option>
-                <option value="Valley Rd">Valley Rd</option>
-                <option value="Capen St">Capen St</option>
-                <option value="Mattapan">Mattapan</option>
-                <option value="North Quincy">North Quincy</option>
-                <option value="Wollaston">Wollaston</option>
-                <option value="Quincy">Quincy</option>
-                <option value="Quincy Adams">Quincy Adams</option>
-                <option value="Braintree">Braintree</option>
-            </optgroup>
-            <optgroup label="Orange Line">
-                <option value="Forest Hills">Forest Hills</option>
-                <option value="Green St">Green St</option>
-                <option value="Stony Brook">Stony Brook</option>
-                <option value="Jackson Sq">Jackson Sq</option>
-                <option value="Roxbury Crossing">Roxbury Crossing</option>
-                <option value="Ruggles">Ruggles</option>
-                <option value="Mass. Ave">Mass. Ave</option>
-                <option value="Back Bay">Back Bay</option>
-                <option value="Tufts Medical Center">Tufts Medical Center</option>
-                <option value="Chinatown">Chinatown</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="State">State</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="North Station">North Station</option>
-                <option value="Community College">Community College</option>
-                <option value="Sullivan Sq">Sullivan Sq</option>
-                <option value="Assembly">Assembly</option>
-                <option value="Wellington">Wellington</option>
-                <option value="Malden Center">Malden Center</option>
-                <option value="Oak Grove">Oak Grove</option>
-            </optgroup>
-            <optgroup label="Green Line">
-                <option value="Medford/Tufts">Medford/Tufts</option>
-                <option value="Ball Sq">Ball Sq</option>
-                <option value="Magoun Sq">Magoun Sq</option>
-                <option value="Gilman Sq">Gilman Sq</option>
-                <option value="East Somerville">East Somerville</option>
-                <option value="Union Sq">Union Sq</option>
-                <option value="Lechmere">Lechmere</option>
-                <option value="Science Park/West End">Science Park/West End</option>
-                <option value="North Station">North Station</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="Government Center">Government Center</option>
-                <option value="Park St">Park St</option>
-                <option value="Boylston">Boylston</option>
-                <option value="Arlington">Arlington</option>
-                <option value="Copley">Copley</option>
-            </optgroup>
-            <optgroup label="Green Line E">
-                <option value="Prudential">Prudential</option>
-                <option value="Symphony">Symphony</option>
-                <option value="Northeastern">Northeastern</option>
-                <option value="MFA">MFA</option>
-                <option value="Longwood Medical Area">Longwood Medical Area</option>
-                <option value="Brigham Circle">Brigham Circle</option>
-                <option value="Fenwood Rd">Fenwood Rd</option>
-                <option value="Mission Park">Mission Park</option>
-                <option value="Riverway">Riverway</option>
-                <option value="Back of the Hill">Back of the Hill</option>
-                <option value="Heath St">Heath St</option>
-            </optgroup>
-            <optgroup label="Green Line D">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="Fenway">Fenway</option>
-                <option value="Longwood">Longwood</option>
-                <option value="Brookline Village">Brookline Village</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Beaconsfield">Beaconsfield</option>
-                <option value="Reservoir">Reservoir</option>
-                <option value="Chestnut Hill">Chestnut Hill</option>
-                <option value="Newton Centre">Newton Centre</option>
-                <option value="Newton Highlands">Newton Highlands</option>
-                <option value="Eliot">Eliot</option>
-                <option value="Waban">Waban</option>
-                <option value="Woodland">Woodland</option>
-                <option value="Riverside">Riverside</option>
-            </optgroup>
-            <optgroup label="Green Line C">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="St. Mary’s St">St. Mary’s St</option>
-                <option value="Hawes St">Hawes St</option>
-                <option value="Kent St">Kent St</option>
-                <option value="St. Paul St">St. Paul St</option>
-                <option value="Coolidge Corner">Coolidge Corner</option>
-                <option value="Summit Ave">Summit Ave</option>
-                <option value="Brandon Hall">Brandon Hall</option>
-                <option value="Fairbanks St">Fairbanks St</option>
-                <option value="Washington Sq">Washington Sq</option>
-                <option value="Tappan St">Tappan St</option>
-                <option value="Dean Rd">Dean Rd</option>
-                <option value="Englewood Ave">Englewood Ave</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Brookline Village">Brookline Village</option>
-            </optgroup>
-        </select>
-   
+    <div id="text-container">
+        <div class="text-box">
+            <p>According to data from the MBTA about gated entries, in September 2024, over 1.2 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city.</p>
+        </div>
+        
+        <div class="text-box">
+            <p>A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.2 million.</p>
+        </div>
+        
+        <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
+        
+        <div class="text-box">
+            <p>Moreover, the MBTA’s gated entry data removes an estimated number of riders who transfer to the Red Line at Park Street, the Blue Line at Government Center, and other intersecting lines. This filtering is meant to clarify Green Line-specific ridership, but it also risks underestimating the true load on the system.</p>
+        </div>
+        
+        <div class="text-box">
+            <p>Yet, despite predictable increases in ridership, the Green Line operated with near-identical train frequencies to quieter summer months. Platforms overflowed at rush hour, trains arrived late, and passengers squeezed onto trains like sardines.</p>
+        </div>
+        
+        <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
+        
+        <div class="text-box">
+            <p>September, with its unique mix of students returning and professionals back from summer, is Boston’s public transit stress test. For the Green Line, the numbers show that it failed—leaving riders waiting on platforms, crowding onto already-packed trains, and questioning whether the country’s oldest transit system can keep up with the modern city it needs to serve.</p>
+        </div>
     </div>
-        <label for="end">Select Destination Stop:</label>
-        <select id="end">
-            <option value="">-- Select Destination Stop --</option> 
-            <optgroup label="Red Line">
-                <option value="Alewife">Alewife</option>
-                <option value="Davis">Davis</option>
-                <option value="Porter">Porter</option>
-                <option value="Harvard">Harvard</option>
-                <option value="Central">Central</option>
-                <option value="Kendall/MIT">Kendall/MIT</option>
-                <option value="Charles/MGH">Charles/MGH</option>
-                <option value="Park St">Park St</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="South Station">South Station</option>
-                <option value="Broadway">Broadway</option>
-                <option value="Andrew">Andrew</option>
-                <option value="JFK/UMASS">JFK/UMASS</option>
-                <option value="Savin Hill">Savin Hill</option>
-                <option value="Fields Corner">Fields Corner</option>
-                <option value="Shawmut">Shawmut</option>
-                <option value="Ashmont">Ashmont</option>
-                <option value="Cedar Grove">Cedar Grove</option>
-                <option value="Butler">Butler</option>
-                <option value="Milton">Milton</option>
-                <option value="Central Ave">Central Ave</option>
-                <option value="Valley Rd">Valley Rd</option>
-                <option value="Capen St">Capen St</option>
-                <option value="Mattapan">Mattapan</option>
-                <option value="North Quincy">North Quincy</option>
-                <option value="Wollaston">Wollaston</option>
-                <option value="Quincy">Quincy</option>
-                <option value="Quincy Adams">Quincy Adams</option>
-                <option value="Braintree">Braintree</option>
-            </optgroup>
-            <optgroup label="Orange Line">
-                <option value="Forest Hills">Forest Hills</option>
-                <option value="Green St">Green St</option>
-                <option value="Stony Brook">Stony Brook</option>
-                <option value="Jackson Sq">Jackson Sq</option>
-                <option value="Roxbury Crossing">Roxbury Crossing</option>
-                <option value="Ruggles">Ruggles</option>
-                <option value="Mass. Ave">Mass. Ave</option>
-                <option value="Back Bay">Back Bay</option>
-                <option value="Tufts Medical Center">Tufts Medical Center</option>
-                <option value="Chinatown">Chinatown</option>
-                <option value="Downtown Crossing">Downtown Crossing</option>
-                <option value="State">State</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="North Station">North Station</option>
-                <option value="Community College">Community College</option>
-                <option value="Sullivan Sq">Sullivan Sq</option>
-                <option value="Assembly">Assembly</option>
-                <option value="Wellington">Wellington</option>
-                <option value="Malden Center">Malden Center</option>
-                <option value="Oak Grove">Oak Grove</option>
-            </optgroup>
-            <optgroup label="Green Line">
-                <option value="Medford/Tufts">Medford/Tufts</option>
-                <option value="Ball Sq">Ball Sq</option>
-                <option value="Magoun Sq">Magoun Sq</option>
-                <option value="Gilman Sq">Gilman Sq</option>
-                <option value="East Somerville">East Somerville</option>
-                <option value="Union Sq">Union Sq</option>
-                <option value="Lechmere">Lechmere</option>
-                <option value="Science Park/West End">Science Park/West End</option>
-                <option value="North Station">North Station</option>
-                <option value="Haymarket">Haymarket</option>
-                <option value="Government Center">Government Center</option>
-                <option value="Park St">Park St</option>
-                <option value="Boylston">Boylston</option>
-                <option value="Arlington">Arlington</option>
-                <option value="Copley">Copley</option>
-            </optgroup>
-            <optgroup label="Green Line E">
-                <option value="Prudential">Prudential</option>
-                <option value="Symphony">Symphony</option>
-                <option value="Northeastern">Northeastern</option>
-                <option value="MFA">MFA</option>
-                <option value="Longwood Medical Area">Longwood Medical Area</option>
-                <option value="Brigham Circle">Brigham Circle</option>
-                <option value="Fenwood Rd">Fenwood Rd</option>
-                <option value="Mission Park">Mission Park</option>
-                <option value="Riverway">Riverway</option>
-                <option value="Back of the Hill">Back of the Hill</option>
-                <option value="Heath St">Heath St</option>
-            </optgroup>
-            <optgroup label="Green Line D">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="Fenway">Fenway</option>
-                <option value="Longwood">Longwood</option>
-                <option value="Brookline Village">Brookline Village</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Beaconsfield">Beaconsfield</option>
-                <option value="Reservoir">Reservoir</option>
-                <option value="Chestnut Hill">Chestnut Hill</option>
-                <option value="Newton Centre">Newton Centre</option>
-                <option value="Newton Highlands">Newton Highlands</option>
-                <option value="Eliot">Eliot</option>
-                <option value="Waban">Waban</option>
-                <option value="Woodland">Woodland</option>
-                <option value="Riverside">Riverside</option>
-            </optgroup>
-            <optgroup label="Green Line C">
-                <option value="Hynes Convention Center">Hynes Convention Center</option>
-                <option value="Kenmore">Kenmore</option>
-                <option value="St. Mary’s St">St. Mary’s St</option>
-                <option value="Hawes St">Hawes St</option>
-                <option value="Kent St">Kent St</option>
-                <option value="St. Paul St">St. Paul St</option>
-                <option value="Coolidge Corner">Coolidge Corner</option>
-                <option value="Summit Ave">Summit Ave</option>
-                <option value="Brandon Hall">Brandon Hall</option>
-                <option value="Fairbanks St">Fairbanks St</option>
-                <option value="Washington Sq">Washington Sq</option>
-                <option value="Tappan St">Tappan St</option>
-                <option value="Dean Rd">Dean Rd</option>
-                <option value="Englewood Ave">Englewood Ave</option>
-                <option value="Brookline Hills">Brookline Hills</option>
-                <option value="Brookline Village">Brookline Village</option>
-            </optgroup>
-        </select>
-    </div>
-<button>Calculate Travel Time</button>
-</body> </html> ```
+
+    <script src="script.js"></script>
+</body>
+</html>
+
