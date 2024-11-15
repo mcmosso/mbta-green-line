@@ -3,40 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBTA Travel Time</title>
-    <link rel="stylesheet" href="style.css">
+    <title>The Green Line’s Breaking Point</title>
+    <style>
+        /* General Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background: #000;
+        }
+
+        h1, p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            padding: 20px 20px 0;
+            color: #fff;
+        }
+
+        /* Fullscreen Section for Parallax Effect */
+        .parallax {
+            position: relative;
+            min-height: 100vh;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Placeholder Images */
+        #section1 {
+            background-image: url('https://via.placeholder.com/1200x800');
+        }
+
+        #section2 {
+            background-image: url('https://via.placeholder.com/1200x800');
+        }
+
+        #section3 {
+            background-image: url('https://via.placeholder.com/1200x800');
+        }
+
+        #section4 {
+            background-image: url('https://via.placeholder.com/1200x800');
+        }
+
+        /* Text Box Styling */
+        .text-box {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            max-width: 600px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .text-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <h1>The Green Line’s Breaking Point: What September Reveals About Boston’s Transit Failures</h1>
-    <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
 
-    <div id="text-container">
+    <h1>The Green Line’s Breaking Point: What September Reveals About Boston’s Transit Failures</h1>
+
+    <!-- Section 1 -->
+    <div class="parallax" id="section1">
         <div class="text-box">
-            <p>According to data from the MBTA about gated entries, in September 2024, over 1.2 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city.</p>
-        </div>
-        
-        <div class="text-box">
-            <p>A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.2 million.</p>
-        </div>
-        
-        <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
-        
-        <div class="text-box">
-            <p>Moreover, the MBTA’s gated entry data removes an estimated number of riders who transfer to the Red Line at Park Street, the Blue Line at Government Center, and other intersecting lines. This filtering is meant to clarify Green Line-specific ridership, but it also risks underestimating the true load on the system.</p>
-        </div>
-        
-        <div class="text-box">
-            <p>Yet, despite predictable increases in ridership, the Green Line operated with near-identical train frequencies to quieter summer months. Platforms overflowed at rush hour, trains arrived late, and passengers squeezed onto trains like sardines.</p>
-        </div>
-        
-        <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
-        
-        <div class="text-box">
-            <p>September, with its unique mix of students returning and professionals back from summer, is Boston’s public transit stress test. For the Green Line, the numbers show that it failed—leaving riders waiting on platforms, crowding onto already-packed trains, and questioning whether the country’s oldest transit system can keep up with the modern city it needs to serve.</p>
+            <p>Rush hour on the Green Line is a Bostonian’s definition of frustration. At Prudential, the platform crowds with commuters, students, and shoppers as another two-car train pulls in. To no one's surprise, it’s already packed to capacity. A few determined riders squeeze on, but the rest wait, hoping the next train will hopefully have space.</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Section 2 -->
+    <div class="parallax" id="section2">
+        <div class="text-box">
+            <p>According to data from the MBTA about gated entries, in September 2024, over 1.2 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.2 million.</p>
+        </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="parallax" id="section3">
+        <div class="text-box">
+            <p>The data reveals a critical failure of the Green Line during rush hours: train frequencies remain nearly unchanged from off-peak periods. On average, trains arrive every 8 to 9 minutes, even during the busiest morning (7:00–9:00 AM) and evening (4:00–6:00 PM) peaks. For a transit system tasked with absorbing predictable demand surges, this stagnation results in overcrowded platforms and delayed commutes.</p>
+        </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="parallax" id="section4">
+        <div class="text-box">
+            <p>The Green Line’s failures aren’t just inconveniences; they represent systemic risks for Boston. Transit inefficiencies increase commute times, disrupt productivity, and discourage public transit use, pushing more people into cars. This exacerbates traffic congestion, worsens air quality, and undermines the city’s climate goals.</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle visibility of text boxes
+        function handleScroll() {
+            const textBoxes = document.querySelectorAll('.text-box');
+
+            textBoxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top;
+                const boxBottom = box.getBoundingClientRect().bottom;
+                const windowHeight = window.innerHeight;
+
+                if (boxTop < windowHeight && boxBottom > 0) {
+                    box.classList.add('visible');
+                } else {
+                    box.classList.remove('visible');
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', handleScroll);
+
+        // Trigger on page load to account for elements already in view
+        handleScroll();
+    </script>
+
 </body>
 </html>
 
