@@ -3,48 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evacuation Challenges Story</title>
+  <title>MBTA Green Line Interactive Map</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://d3js.org/d3.v6.min.js"></script>
-  <script src="https://unpkg.com/scrollama"></script>
-  <script src="https://unpkg.com/leaflet"></script>
 </head>
 <body>
 
-  <!-- Intro Section -->
-  <section id="intro">
-    <video autoplay muted loop id="bg-video">
-      <source src="path/to/your/video.mp4" type="video/mp4">
-    </video>
-    <div class="overlay">
-      <h1>Understanding Evacuation Challenges</h1>
-      <p>An in-depth look at obstacles faced during emergency evacuations.</p>
-    </div>
-  </section>
+  <h1>MBTA Green Line Interactive Map</h1>
+  <p>Hover over a station to see the average wait time.</p>
 
-  <!-- Scroll-based Content Section -->
-  <section id="scroll-content">
-    <div class="step" data-step="1">
-      <h2>Introduction</h2>
-      <p>Evacuation planning can be lifesaving, but it's often harder than it seems.</p>
-    </div>
-    <div class="step" data-step="2">
-      <h2>Statistics</h2>
-      <div id="chart"></div>
-    </div>
-    <div class="step" data-step="3">
-      <h2>Mapping the Risks</h2>
-      <div id="map"></div>
-    </div>
-    <div class="step" data-step="4">
-      <h2>Conclusion</h2>
-      <p>Improved planning and resources are needed to make evacuations safer.</p>
-    </div>
-  </section>
+  <div id="map-container">
+    <svg id="green-line-map" viewBox="0 0 1000 500">
+      <!-- Branch B -->
+      <line x1="50" y1="50" x2="900" y2="50" stroke="green" stroke-width="4" />
+      <circle class="station" cx="70" cy="50" r="8" data-name="Boston College" data-wait="8.5"></circle>
+      <circle class="station" cx="130" cy="50" r="8" data-name="South Street" data-wait="7.2"></circle>
+      <circle class="station" cx="190" cy="50" r="8" data-name="Chestnut Hill Ave" data-wait="6.4"></circle>
+      <circle class="station" cx="250" cy="50" r="8" data-name="Chiswick Road" data-wait="7.8"></circle>
+      <circle class="station" cx="310" cy="50" r="8" data-name="Sutherland Road" data-wait="8.0"></circle>
+      <circle class="station" cx="370" cy="50" r="8" data-name="Washington Street" data-wait="7.5"></circle>
+      <circle class="station" cx="430" cy="50" r="8" data-name="Warren Street" data-wait="7.9"></circle>
+      <circle class="station" cx="490" cy="50" r="8" data-name="Allston Street" data-wait="8.1"></circle>
+      <circle class="station" cx="550" cy="50" r="8" data-name="Griggs Street" data-wait="7.6"></circle>
+      <circle class="station" cx="610" cy="50" r="8" data-name="Harvard Avenue" data-wait="8.3"></circle>
+      <circle class="station" cx="670" cy="50" r="8" data-name="Packards Corner" data-wait="8.0"></circle>
+      <circle class="station" cx="730" cy="50" r="8" data-name="Babcock Street" data-wait="7.4"></circle>
+      <circle class="station" cx="790" cy="50" r="8" data-name="Pleasant Street" data-wait="8.2"></circle>
+      <circle class="station" cx="850" cy="50" r="8" data-name="Boston University West" data-wait="7.8"></circle>
 
-  <!-- Script for Scroll Effects and Map Initialization -->
-  <script src="script.js"></script>
-</body>
-</html>
+      <!-- Branch C -->
+      <line x1="50" y1="150" x2="900" y2="150" stroke="green" stroke-width="4" />
+      <circle class="station" cx="70" cy="150" r="8" data-name="Cleveland Circle" data-wait="6.3"></circle>
+      <circle class="station" cx="130" cy="150" r="8" data-name="Englewood Avenue" data-wait="7.1"></circle>
+      <circle class="station" cx="190" cy="150" r="8" data-name="Dean Road" data-wait="6.9"></circle>
+      <circle class="station" cx="250" cy="150" r="8" data-name="Tappan Street" data-wait="7.3"></circle>
+      <circle class="station" cx="310" cy="150" r="8" data-name="Washington Square" data-wait="6.8"></circle>
+      <circle class="station" cx="370" cy="150" r="8" data-name="Fairbanks Street" data-wait="7.0"></circle>
+      <circle class="station" cx="430" cy="150" r="8" data-name="Brandon Hall" data-wait="6.5"></circle>
+      <circle class="station" cx="490" cy="150" r="8" data-name="Summit Avenue" data-wait="7.1"></circle>
+      <circle class="station" cx="550" cy="150" r="8" data-name="Coolidge Corner" data-wait="7.4"></circle>
+      <circle class="station" cx="610" cy="150" r="8" data-name="Saint Paul Street" data-wait="7.8"></circle>
+      <circle class="station" cx="670" cy="150" r="8" data-name="Kent Street" data-wait="7.6"></circle>
+      <circle class="station" cx="730" cy="150" r="8" data-name="Hawes Street" data-wait="7.3"></circle>
+      <circle class="station" cx="790" cy="150" r="8" data-name="Saint Marys Street" data-wait="7.7"></circle>
+
+      <!-- Branch D -->
+      <line x1="50" y1="250" x2="900" y2="250" stroke="green" stroke-width="4" />
+      <circle class="station" cx="70" cy="250" r="8" data-name="Riverside" data-wait="5.9"></circle>
+      <circle class="station" cx="130" cy="250" r="8" data-name="Woodland" data-wait="6.1"></circle>
+      <circle class="station" cx="190" cy="250" r="8" data-name="Waban" data-wait="5.8"></circle>
+      <circle class="station" cx="250" cy="250" r="8" data-name="Eliot" data-wait="6.2"></circle>
+      <circle class="station" cx="310" cy="250" r="8" data-name="Newton Highlands" data-wait="6.0"></circle>
+      <circle class="station" cx="370" cy="250" r="8" data-name="Newton Centre" data-wait="6.4"></circle>
+      <circle class="station" cx="430" cy="250" r="8" data-name="Chestnut Hill" data-wait="6.7"></circle>
+      <circle class="station" cx="490" cy="250" r="8" data-name="Reservoir" data-wait="6.5"></circle>
+      <circle class="station" cx="550" cy="250" r="8" data-name="Beaconsfield" data-wait="6.9"></circle>
+
+      <!-- Branch E -->
+      <line x1="50" y1="350" x2="900" y2="350" stroke="green" stroke-width="4" />
+      <circle class="station" cx="70" cy="350" r="8" data-name="Heath Street" data-wait="5.4"></circle>
+      <circle class="station" cx="130" cy="350" r="8" data-name="Back of the Hill" data-wait="5.8"></circle>
+      <circle class="station" cx="190" cy="350" r="8" data-name="Riverway" data-wait="6.3"></circle>
+      <circle class="station" cx="250" cy="350" r="8" data-name="Mission Park" data-wait="5.6"></circle>
+      <circle class="station" cx="310" cy="350" r="8" data-name="Fenwood Road" data-wait="5.9"></circle>
+      <circle class="station" cx="370" cy="350" r="8" data-name="Brigham Circle" data-wait="6.0"></circle>
+      <circle class="station" cx="430" cy="350" r="8" data-name="Longwood Medical Area" data-wait="6.5"></circle>
+      <circle class="station" cx="490" cy="350" r="8" data-name="Museum of Fine Arts" data-wait="
+
 
