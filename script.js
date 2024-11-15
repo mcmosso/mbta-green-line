@@ -1,58 +1,72 @@
-// Initialize Scrollama
-const scroller = scrollama();
+const map = L.map('map').setView([42.3601, -71.0589], 13); // Centered on Boston
 
-// Handle step enter
-function handleStepEnter(response) {
-  // Update active class
-  document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-  response.element.classList.add('active');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
 
-  // Trigger animations or updates based on step
-  const step = response.element.getAttribute('data-step');
-  if (step === '2') {
-    drawChart();
-  } else if (step === '3') {
-    initMap();
-  }
+// Populate dropdowns with T stops by line
+async function fetchTStops() {
+    const response = await fetch('https://api-v3.mbta.com/stops');
+    const data = await response.json();
+
+    const lines = {
+        orange: document.getElementById('start-orange'),
+        green: document.getElementById('start-green'),
+        blue: document.getElementById('start-blue'),
+        red: document.getElementById('start-red'),
+    };
+
+    const endLines = {
+        orange: document.getElementById('end-orange'),
+        green: document.getElementById('end-green'),
+        blue: document.getElementById('end-blue'),
+        red: document.getElementById('end-red'),
+    };
+
+    data.data.forEach(stop => {
+        const line = stop.attributes.route_id; // Get the line id
+
+        // Check for each line and populate corresponding dropdowns
+        if (line === 'Orange') {
+            lines.orange.appendChild(createOption(stop));
+            endLines.orange.appendChild(createOption(stop));
+        } else if (line === 'Green') {
+            lines.green.appendChild(createOption(stop));
+            endLines.green.appendChild(createOption(stop));
+        } else if (line === 'Blue') {
+            lines.blue.appendChild(createOption(stop));
+            endLines.blue.appendChild(createOption(stop));
+        } else if (line === 'Red') {
+            lines.red.appendChild(createOption(stop));
+            endLines.red.appendChild(createOption(stop));
+        }
+    });
 }
 
-// Initialize chart (D3.js)
-function drawChart() {
-  const data = [30, 70, 50, 80, 100];
-  const svg = d3.select('#chart').append('svg')
-    .attr('width', 500)
-    .attr('height', 400);
-  
-  svg.selectAll('rect')
-    .data(data)
-    .enter()
-    .append('rect')
-    .attr('x', (d, i) => i * 100)
-    .attr('y', d => 400 - d * 4)
-    .attr('width', 80)
-    .attr('height', d => d * 4)
-    .attr('fill', 'steelblue');
+// Create option elements for the dropdowns
+function createOption(stop) {
+    const option = document.createElement('option');
+    option.value = stop.id;
+    option.textContent = stop.attributes.name;
+    return option;
 }
 
-// Initialize map (Leaflet.js)
-function initMap() {
-  const map = L.map('map').setView([42.3601, -71.0589], 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-}
+// Calculate travel time
+document.getElementById('calculate').addEventListener('click', async () => {
+    const selectedLine = document.querySelector('select').value; // Get the selected line
+    const startId = document.getElementById(`start-${selectedLine}`).value;
+    const endId = document.getElementById(`end-${selectedLine}`).value;
 
-// Initialize Scrollama and setup event listeners
-function init() {
-  scroller.setup({
-    step: '.step',
-    offset: 0.5,
-    debug: false,
-  })
-  .onStepEnter(handleStepEnter);
+    const response = await fetch(`https://api-v3.mbta.com/schedules?filter[stop]=${startId}&filter[route]=${endId}`);
+    const data = await response.json();
 
-  window.addEventListener('resize', scroller.resize);
-}
+    if (data.data.length > 0) {
+        const travelTime = data.data[0].attributes.departure_time; // Adjust to get relevant data
+        document.getElementById('result').innerText = `Estimated travel time: ${travelTime}`;
+    } else {
+        document.getElementById('result').innerText = 'No available route found.';
+    }
+});
 
-init();
+fetchTStops();
+
