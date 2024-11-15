@@ -1,175 +1,416 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Green Line Struggle: MBTA's Capacity Crisis</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-</head>
-<body>
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <h1>The Green Line Struggle: Can the MBTA Sustain Its Riders?</h1>
-        <p>The MBTA Green Line is facing significant challenges. From longer wait times to overcrowded platforms, it is becoming increasingly difficult for Boston commuters to rely on the T. Explore the issues through data, stories, and interactive visualizations.</p>
-    </div>
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.scrollama = factory());
+}(this, (function () { 'use strict';
 
-    <!-- Interactive Map Section -->
-    <div class="map-section">
-        <h2>Interactive Green Line Map</h2>
-        <p>Hover over each station to see the average wait times between trains for the month of September.</p>
-        <div id="map" style="height: 600px; width: 100%; margin: 0 auto;"></div>
-    </div>
+  // DOM helper functions
 
-    <!-- Data Visualization Section -->
-    <div class="data-visualization">
-        <h2>Green Line Capacity vs. Demand</h2>
-        <p>The demand for the Green Line far exceeds its current capacity. Explore how wait times fluctuate and what this means for commuters.</p>
-        <div id="capacity-chart"></div>
-    </div>
+  // public
+  function selectAll(selector, parent = document) {
+    if (typeof selector === 'string') {
+      return Array.from(parent.querySelectorAll(selector));
+    } else if (selector instanceof Element) {
+      return [selector];
+    } else if (selector instanceof NodeList) {
+      return Array.from(selector);
+    } else if (selector instanceof Array) {
+      return selector;
+    }
+    return [];
+  }
 
-    <!-- Narrative Section -->
-    <div class="narrative-section">
-        <h2>Voices of the Riders</h2>
-        <p>"Sometimes I wait for over 20 minutes just to see an already-packed train roll up to the station," says Sarah, a daily commuter from Allston. The experience of Green Line riders is marked by frustration, long waits, and packed trains. Can the Green Line keep up?</p>
-    </div>
+  // SETUP
+  function create(className) {
+  	const el = document.createElement("div");
+  	el.className = `scrollama__debug-step ${className}`;
+  	el.style.position = "fixed";
+  	el.style.left = "0";
+  	el.style.width = "100%";
+  	el.style.zIndex = "9999";
+  	el.style.borderTop = "2px solid black";
+  	el.style.borderBottom = "2px solid black";
 
-    <!-- JavaScript for Map and Visualization -->
-    <script>
-        // Initialize the Leaflet map
-        const map = L.map('map').setView([42.3601, -71.0589], 12); // Center on Boston
+  	const p = document.createElement("p");
+  	p.style.position = "absolute";
+  	p.style.left = "0";
+  	p.style.height = "1px";
+  	p.style.width = "100%";
+  	p.style.borderTop = "1px dashed black";
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
+  	el.appendChild(p);
+  	document.body.appendChild(el);
+  	return el;
+  }
 
-        // Full dataset of Green Line stations
-        const stations = [
-            { name: "Boston College", lat: 42.340081, lng: -71.166769, branch: "B", avgWait: 10 },
-            { name: "South Street", lat: 42.339394, lng: -71.157995, branch: "B", avgWait: 9 },
-            { name: "Chestnut Hill Avenue", lat: 42.338169, lng: -71.152811, branch: "B", avgWait: 8 },
-            { name: "Chiswick Road", lat: 42.340805, lng: -71.147598, branch: "B", avgWait: 7 },
-            { name: "Sutherland Road", lat: 42.341551, lng: -71.141271, branch: "B", avgWait: 8 },
-            { name: "Washington Street", lat: 42.343864, lng: -71.137762, branch: "B", avgWait: 7 },
-            { name: "Warren Street", lat: 42.348097, lng: -71.135268, branch: "B", avgWait: 8 },
-            { name: "Allston Street", lat: 42.348255, lng: -71.131564, branch: "B", avgWait: 9 },
-            { name: "Griggs Street", lat: 42.348545, lng: -71.125915, branch: "B", avgWait: 8 },
-            { name: "Harvard Avenue", lat: 42.350651, lng: -71.121204, branch: "B", avgWait: 7 },
-            { name: "Packard's Corner", lat: 42.353020, lng: -71.118770, branch: "B", avgWait: 6 },
-            { name: "Blandford Street", lat: 42.349293, lng: -71.100258, branch: "B", avgWait: 5 },
-            { name: "Kenmore", lat: 42.3483, lng: -71.0956, branch: "C", avgWait: 5 },
-            { name: "Hynes Convention Center", lat: 42.34735, lng: -71.08781, branch: "C", avgWait: 6 },
-            { name: "Copley", lat: 42.349974, lng: -71.077447, branch: "C", avgWait: 4 },
-            { name: "Arlington", lat: 42.351902, lng: -71.070893, branch: "C", avgWait: 4 },
-            { name: "Boylston", lat: 42.35302, lng: -71.06459, branch: "C", avgWait: 3 },
-            { name: "Park Street", lat: 42.3564, lng: -71.0623, branch: "B", avgWait: 4 },
-            { name: "Government Center", lat: 42.359705, lng: -71.059215, branch: "C", avgWait: 5 },
-            { name: "Haymarket", lat: 42.363021, lng: -71.05829, branch: "C", avgWait: 6 },
-            { name: "North Station", lat: 42.365577, lng: -71.06129, branch: "C", avgWait: 5 },
-            { name: "Science Park/West End", lat: 42.366664, lng: -71.067666, branch: "E", avgWait: 7 },
-            { name: "Lechmere", lat: 42.3708, lng: -71.076, branch: "E", avgWait: 6 },
-            { name: "Heath Street", lat: 42.328979, lng: -71.110223, branch: "E", avgWait: 9 },
-            { name: "Back of the Hill", lat: 42.330139, lng: -71.111313, branch: "E", avgWait: 8 },
-            { name: "Riverway", lat: 42.331684, lng: -71.111931, branch: "E", avgWait: 8 },
-            { name: "Fenwood Road", lat: 42.333706, lng: -71.109733, branch: "E", avgWait: 7 },
-            { name: "Mission Park", lat: 42.333179, lng: -71.108631, branch: "E", avgWait: 8 },
-            { name: "Longwood Medical Area", lat: 42.335084, lng: -71.107807, branch: "E", avgWait: 7 },
-            { name: "Brigham Circle", lat: 42.334229, lng: -71.10553, branch: "E", avgWait: 7 },
-            { name: "Fenway", lat: 42.345394, lng: -71.104165, branch: "D", avgWait: 6 },
-            { name: "Brookline Village", lat: 42.332927, lng: -71.116608, branch: "D", avgWait: 8 },
-            { name: "Brookline Hills", lat: 42.33154, lng: -71.12665, branch: "D", avgWait: 8 },
-            { name: "Beaconsfield", lat: 42.335663, lng: -71.141019, branch: "D", avgWait: 9 },
-            { name: "Reservoir", lat: 42.336971, lng: -71.148624, branch: "D", avgWait: 10 },
-            { name: "Chestnut Hill", lat: 42.326653, lng: -71.165314, branch: "D", avgWait: 9 },
-            { name: "Newton Centre", lat: 42.329391, lng: -71.192429, branch: "D", avgWait: 11 },
-            { name: "Newton Highlands", lat: 42.321597, lng: -71.206508, branch: "D", avgWait: 12 },
-            { name: "Eliot", lat: 42.319023, lng: -71.216483, branch: "D", avgWait: 11 },
-            { name: "Waban", lat: 42.325407, lng: -71.230923, branch: "D", avgWait: 10 },
-            { name: "Woodland", lat: 42.333378, lng: -71.244274, branch: "D", avgWait: 10 },
-            { name: "Riverside", lat: 42.337112, lng: -71.25266, branch: "D", avgWait: 11 }
-        ];
+  // UPDATE
+  function update({ id, step, marginTop }) {
+  	const { index, height } = step;
+  	const className = `scrollama__debug-step--${id}-${index}`;
+  	let el = document.querySelector(`.${className}`);
+  	if (!el) el = create(className);
 
-        // Colors for each branch
-        const branchColors = {
-            "B": "#00843D",
-            "C": "#0067AC",
-            "D": "#ED8B00",
-            "E": "#8A8A8D"
-        };
+  	el.style.top = `${marginTop * -1}px`;
+  	el.style.height = `${height}px`;
+  	el.querySelector("p").style.top = `${height / 2}px`;
+  }
 
-        // Add each station as a circle marker on the map
-        stations.forEach(station => {
-            L.circleMarker([station.lat, station.lng], {
-                color: branchColors[station.branch],
-                radius: 8,
-                fillOpacity: 0.7
-            })
-            .bindTooltip(`<strong>${station.name}</strong><br>Avg Wait Time: ${station.avgWait} minutes`)
-            .addTo(map);
-        });
+  function generateId() {
+      const alphabet = "abcdefghijklmnopqrstuvwxyz";
+      const date = Date.now();
+      const result = [];
+      for (let i = 0; i < 6; i += 1) {
+        const char = alphabet[Math.floor(Math.random() * alphabet.length)];
+        result.push(char);
+      }
+      return `${result.join("")}${date}`;
+    }
 
-        // Data Visualization using D3.js for capacity vs. demand
-        const capacityData = [
-            { day: 'Monday', capacity: 70, demand: 120 },
-            { day: 'Tuesday', capacity: 70, demand: 110 },
-            { day: 'Wednesday', capacity: 70, demand: 130 },
-            { day: 'Thursday', capacity: 70, demand: 125 },
-            { day: 'Friday', capacity: 70, demand: 150 },
-            { day: 'Saturday', capacity: 70, demand: 100 },
-            { day: 'Sunday', capacity: 70, demand: 90 }
-        ];
+  function err$1(msg) {
+  	console.error(`scrollama error: ${msg}`);
+  }
 
-        const margin = { top: 20, right: 30, bottom: 40, left: 40 },
-              width = 800 - margin.left - margin.right,
-              height = 400 - margin.top - margin.bottom;
+  function getIndex(node) {
+  	return +node.getAttribute("data-scrollama-index");
+  }
 
-        const svg = d3.select("#capacity-chart")
-                      .append("svg")
-                      .attr("width", width + margin.left + margin.right)
-                      .attr("height", height + margin.top + margin.bottom)
-                      .append("g")
-                      .attr("transform", `translate(${margin.left},${margin.top})`);
+  function createProgressThreshold(height, threshold) {
+      const count = Math.ceil(height / threshold);
+      const t = [];
+      const ratio = 1 / count;
+      for (let i = 0; i < count + 1; i += 1) {
+        t.push(i * ratio);
+      }
+      return t;
+    }
 
-        const x = d3.scaleBand()
-                    .domain(capacityData.map(d => d.day))
-                    .range([0, width])
-                    .padding(0.2);
+  function parseOffset(x) {
+  	if (typeof x === "string" && x.indexOf("px") > 0) {
+  		const v = +x.replace("px", "");
+  		if (!isNaN(v)) return { format: "pixels", value: v };
+  		else {
+  			err("offset value must be in 'px' format. Fallback to 0.5.");
+  			return { format: "percent", value: 0.5 };
+  		}
+  	} else if (typeof x === "number" || !isNaN(+x)) {
+  		if (x > 1) err("offset value is greater than 1. Fallback to 1.");
+  		if (x < 0) err("offset value is lower than 0. Fallback to 0.");
+  		return { format: "percent", value: Math.min(Math.max(0, x), 1) };
+  	}
+  	return null;
+  }
 
-        svg.append("g")
-           .attr("transform", `translate(0,${height})`)
-           .call(d3.axisBottom(x));
+  function indexSteps(steps) {
+  	steps.forEach((step) =>
+  		step.node.setAttribute("data-scrollama-index", step.index)
+  	);
+  }
 
-        const y = d3.scaleLinear()
-                    .domain([0, 160])
-                    .nice()
-                    .range([height, 0]);
+  function getOffsetTop(node) {
+    const { top } = node.getBoundingClientRect();
+    const scrollTop = window.pageYOffset;
+    const clientTop = document.body.clientTop || 0;
+    return top + scrollTop - clientTop;
+  }
 
-        svg.append("g")
-           .call(d3.axisLeft(y));
+  let currentScrollY;
+  let comparisonScrollY;
+  let direction;
 
-        svg.selectAll(".bar.capacity")
-           .data(capacityData)
-           .enter()
-           .append("rect")
-           .attr("class", "bar capacity")
-           .attr("x", d => x(d.day))
-           .attr("y", d => y(d.capacity))
-           .attr("width", x.bandwidth() / 2)
-           .attr("height", d => height - y(d.capacity))
-           .attr("fill", "#00843D");
+  function onScroll(container) {
+  	const scrollTop = container ? container.scrollTop : window.pageYOffset;
 
-        svg.selectAll(".bar.demand")
-           .data(capacityData)
-           .enter()
-           .append("rect")
-           .attr("class", "bar demand")
-           .attr("x", d => x(d.day) + x.bandwidth() / 2)
-           .attr("y", d => y(d.demand))
-           .attr("width", x.bandwidth() / 2)
-           .attr("height", d => height - y(d.demand))
-           .attr("fill", "#ED8B00");
-    </script>
-</body>
-</html>
+  	if (currentScrollY === scrollTop) return;
+  	currentScrollY = scrollTop;
+  	if (currentScrollY > comparisonScrollY) direction = "down";
+  	else if (currentScrollY < comparisonScrollY) direction = "up";
+  	comparisonScrollY = currentScrollY;
+  }
+
+  function setupScroll(container) {
+  	currentScrollY = 0;
+  	comparisonScrollY = 0;
+  	document.addEventListener("scroll", () => onScroll(container));
+  }
+
+  function scrollama() {
+  	let cb = {};
+
+  	let id = generateId();
+  	let steps = [];
+  	let globalOffset;
+  	let containerElement;
+  	let rootElement;
+
+  	let progressThreshold = 0;
+
+  	let isEnabled = false;
+  	let isProgress = false;
+  	let isDebug = false;
+  	let isTriggerOnce = false;
+
+  	let exclude = [];
+
+  	/* HELPERS */
+  	function reset() {
+  		cb = {
+  			stepEnter: () => { },
+  			stepExit: () => { },
+  			stepProgress: () => { },
+  		};
+  		exclude = [];
+  	}
+
+  	function handleEnable(shouldEnable) {
+  		if (shouldEnable && !isEnabled) updateObservers();
+  		if (!shouldEnable && isEnabled) disconnectObservers();
+  		isEnabled = shouldEnable;
+  	}
+
+  	/* NOTIFY CALLBACKS */
+  	function notifyProgress(element, progress) {
+  		const index = getIndex(element);
+  		const step = steps[index];
+  		if (progress !== undefined) step.progress = progress;
+  		const response = { element, index, progress, direction };
+  		if (step.state === "enter") cb.stepProgress(response);
+  	}
+
+  	function notifyStepEnter(element, check = true) {
+  		const index = getIndex(element);
+  		const step = steps[index];
+  		const response = { element, index, direction };
+
+  		step.direction = direction;
+  		step.state = "enter";
+
+  		// if (isPreserveOrder && check && direction !== "up")
+  		//   notifyOthers(index, "above");
+  		// if (isPreserveOrder && check && direction === "up")
+  		//   notifyOthers(index, "below");
+
+  		if (!exclude[index]) cb.stepEnter(response);
+  		if (isTriggerOnce) exclude[index] = true;
+  	}
+
+  	function notifyStepExit(element, check = true) {
+  		const index = getIndex(element);
+  		const step = steps[index];
+
+  		if (!step.state) return false;
+
+  		const response = { element, index, direction };
+
+  		if (isProgress) {
+  			if (direction === "down" && step.progress < 1) notifyProgress(element, 1);
+  			else if (direction === "up" && step.progress > 0)
+  				notifyProgress(element, 0);
+  		}
+
+  		step.direction = direction;
+  		step.state = "exit";
+
+  		cb.stepExit(response);
+  	}
+
+  	/* OBSERVERS - HANDLING */
+  	function resizeStep([entry]) {
+  		const index = getIndex(entry.target);
+  		const step = steps[index];
+  		const h = entry.target.offsetHeight;
+  		if (h !== step.height) {
+  			step.height = h;
+  			disconnectObserver(step);
+  			updateStepObserver(step);
+  			updateResizeObserver(step);
+  		}
+  	}
+
+  	function intersectStep([entry]) {
+  		onScroll(containerElement);
+
+  		const { isIntersecting, target } = entry;
+  		if (isIntersecting) notifyStepEnter(target);
+  		else notifyStepExit(target);
+  	}
+
+  	function intersectProgress([entry]) {
+  		const index = getIndex(entry.target);
+  		const step = steps[index];
+  		const { isIntersecting, intersectionRatio, target } = entry;
+  		if (isIntersecting && step.state === "enter")
+  			notifyProgress(target, intersectionRatio);
+  	}
+
+  	/*  OBSERVERS - CREATION */
+  	function disconnectObserver({ observers }) {
+  		Object.keys(observers).map((name) => {
+  			observers[name].disconnect();
+  		});
+  	}
+
+  	function disconnectObservers() {
+  		steps.forEach(disconnectObserver);
+  	}
+
+  	function updateResizeObserver(step) {
+  		const observer = new ResizeObserver(resizeStep);
+  		observer.observe(step.node);
+  		step.observers.resize = observer;
+  	}
+
+  	function updateResizeObservers() {
+  		steps.forEach(updateResizeObserver);
+  	}
+
+  	function updateStepObserver(step) {
+  		const h = window.innerHeight;
+  		const off = step.offset || globalOffset;
+  		const factor = off.format === "pixels" ? 1 : h;
+  		const offset = off.value * factor;
+  		const marginTop = step.height / 2 - offset;
+  		const marginBottom = step.height / 2 - (h - offset);
+  		const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+  		const root = rootElement;
+
+  		const threshold = 0.5;
+  		const options = { rootMargin, threshold, root };
+  		const observer = new IntersectionObserver(intersectStep, options);
+
+  		observer.observe(step.node);
+  		step.observers.step = observer;
+
+  		if (isDebug) update({ id, step, marginTop, marginBottom });
+  	}
+
+  	function updateStepObservers() {
+  		steps.forEach(updateStepObserver);
+  	}
+
+  	function updateProgressObserver(step) {
+  		const h = window.innerHeight;
+  		const off = step.offset || globalOffset;
+  		const factor = off.format === "pixels" ? 1 : h;
+  		const offset = off.value * factor;
+  		const marginTop = -offset + step.height;
+  		const marginBottom = offset - h;
+  		const rootMargin = `${marginTop}px 0px ${marginBottom}px 0px`;
+
+  		const threshold = createProgressThreshold(step.height, progressThreshold);
+  		const options = { rootMargin, threshold };
+  		const observer = new IntersectionObserver(intersectProgress, options);
+
+  		observer.observe(step.node);
+  		step.observers.progress = observer;
+  	}
+
+  	function updateProgressObservers() {
+  		steps.forEach(updateProgressObserver);
+  	}
+
+  	function updateObservers() {
+  		disconnectObservers();
+  		updateResizeObservers();
+  		updateStepObservers();
+  		if (isProgress) updateProgressObservers();
+  	}
+
+  	/* SETUP */
+  	const S = {};
+
+  	S.setup = ({
+  		step,
+  		parent,
+  		offset = 0.5,
+  		threshold = 4,
+  		progress = false,
+  		once = false,
+  		debug = false,
+  		container = undefined,
+  		root = null
+  	}) => {
+
+  		setupScroll(container);
+
+  		steps = selectAll(step, parent).map((node, index) => ({
+  			index,
+  			direction: undefined,
+  			height: node.offsetHeight,
+  			node,
+  			observers: {},
+  			offset: parseOffset(node.dataset.offset),
+  			top: getOffsetTop(node),
+  			progress: 0,
+  			state: undefined,
+  		}));
+
+  		if (!steps.length) {
+  			err$1("no step elements");
+  			return S;
+  		}
+
+  		isProgress = progress;
+  		isTriggerOnce = once;
+  		isDebug = debug;
+  		progressThreshold = Math.max(1, +threshold);
+  		globalOffset = parseOffset(offset);
+  		containerElement = container;
+  		rootElement = root;
+
+  		reset();
+  		indexSteps(steps);
+  		handleEnable(true);
+  		return S;
+  	};
+
+  	S.enable = () => {
+  		handleEnable(true);
+  		return S;
+  	};
+
+  	S.disable = () => {
+  		handleEnable(false);
+  		return S;
+  	};
+
+  	S.destroy = () => {
+  		handleEnable(false);
+  		reset();
+  		return S;
+  	};
+
+  	S.resize = () => {
+  		updateObservers();
+  		return S;
+  	};
+
+  	S.offset = (x) => {
+  		if (x === null || x === undefined) return globalOffset.value;
+  		globalOffset = parseOffset(x);
+  		updateObservers();
+  		return S;
+  	};
+
+  	S.onStepEnter = (f) => {
+  		if (typeof f === "function") cb.stepEnter = f;
+  		else err$1("onStepEnter requires a function");
+  		return S;
+  	};
+
+  	S.onStepExit = (f) => {
+  		if (typeof f === "function") cb.stepExit = f;
+  		else err$1("onStepExit requires a function");
+  		return S;
+  	};
+
+  	S.onStepProgress = (f) => {
+  		if (typeof f === "function") cb.stepProgress = f;
+  		else err$1("onStepProgress requires a function");
+  		return S;
+  	};
+  	return S;
+  }
+
+  return scrollama;
+
+})));
