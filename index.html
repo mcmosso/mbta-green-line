@@ -8,65 +8,114 @@
 </head>
 <body>
 
-  <h1>MBTA Green Line Interactive Map</h1>
-  <p>Hover over a station to see the average wait time.</p>
+  <h1>MBTA Green Line Map</h1>
+  <p>Hover over a station to see the station name.</p>
 
   <div id="map-container">
-    <svg id="green-line-map" viewBox="0 0 1000 500">
+    <svg id="green-line-map" viewBox="0 0 1200 500">
+
       <!-- Branch B -->
-      <line x1="50" y1="50" x2="900" y2="50" stroke="green" stroke-width="4" />
-      <circle class="station" cx="70" cy="50" r="8" data-name="Boston College" data-wait="8.5"></circle>
-      <circle class="station" cx="130" cy="50" r="8" data-name="South Street" data-wait="7.2"></circle>
-      <circle class="station" cx="190" cy="50" r="8" data-name="Chestnut Hill Ave" data-wait="6.4"></circle>
-      <circle class="station" cx="250" cy="50" r="8" data-name="Chiswick Road" data-wait="7.8"></circle>
-      <circle class="station" cx="310" cy="50" r="8" data-name="Sutherland Road" data-wait="8.0"></circle>
-      <circle class="station" cx="370" cy="50" r="8" data-name="Washington Street" data-wait="7.5"></circle>
-      <circle class="station" cx="430" cy="50" r="8" data-name="Warren Street" data-wait="7.9"></circle>
-      <circle class="station" cx="490" cy="50" r="8" data-name="Allston Street" data-wait="8.1"></circle>
-      <circle class="station" cx="550" cy="50" r="8" data-name="Griggs Street" data-wait="7.6"></circle>
-      <circle class="station" cx="610" cy="50" r="8" data-name="Harvard Avenue" data-wait="8.3"></circle>
-      <circle class="station" cx="670" cy="50" r="8" data-name="Packards Corner" data-wait="8.0"></circle>
-      <circle class="station" cx="730" cy="50" r="8" data-name="Babcock Street" data-wait="7.4"></circle>
-      <circle class="station" cx="790" cy="50" r="8" data-name="Pleasant Street" data-wait="8.2"></circle>
-      <circle class="station" cx="850" cy="50" r="8" data-name="Boston University West" data-wait="7.8"></circle>
+      <line x1="50" y1="50" x2="800" y2="50" stroke="green" stroke-width="6" />
+      <circle class="station" cx="60" cy="50" r="5" data-name="Boston College"></circle>
+      <text x="60" y="40" font-size="10" text-anchor="middle">Boston College</text>
+
+      <circle class="station" cx="120" cy="50" r="5" data-name="South Street"></circle>
+      <text x="120" y="40" font-size="10" text-anchor="middle">South Street</text>
+
+      <circle class="station" cx="180" cy="50" r="5" data-name="Chestnut Hill Ave"></circle>
+      <text x="180" y="40" font-size="10" text-anchor="middle">Chestnut Hill Ave</text>
+
+      <circle class="station" cx="240" cy="50" r="5" data-name="Chiswick Road"></circle>
+      <text x="240" y="40" font-size="10" text-anchor="middle">Chiswick Road</text>
+
+      <circle class="station" cx="300" cy="50" r="5" data-name="Sutherland Road"></circle>
+      <text x="300" y="40" font-size="10" text-anchor="middle">Sutherland Road</text>
+
+      <circle class="station" cx="360" cy="50" r="5" data-name="Washington Street"></circle>
+      <text x="360" y="40" font-size="10" text-anchor="middle">Washington Street</text>
+
+      <circle class="station" cx="420" cy="50" r="5" data-name="Warren Street"></circle>
+      <text x="420" y="40" font-size="10" text-anchor="middle">Warren Street</text>
+
+      <circle class="station" cx="480" cy="50" r="5" data-name="Allston Street"></circle>
+      <text x="480" y="40" font-size="10" text-anchor="middle">Allston Street</text>
+
+      <circle class="station" cx="540" cy="50" r="5" data-name="Griggs Street"></circle>
+      <text x="540" y="40" font-size="10" text-anchor="middle">Griggs Street</text>
+
+      <circle class="station" cx="600" cy="50" r="5" data-name="Harvard Avenue"></circle>
+      <text x="600" y="40" font-size="10" text-anchor="middle">Harvard Avenue</text>
+
+      <circle class="station" cx="660" cy="50" r="5" data-name="Packards Corner"></circle>
+      <text x="660" y="40" font-size="10" text-anchor="middle">Packards Corner</text>
+
+      <circle class="station" cx="720" cy="50" r="5" data-name="Babcock Street"></circle>
+      <text x="720" y="40" font-size="10" text-anchor="middle">Babcock Street</text>
+
+      <circle class="station" cx="780" cy="50" r="5" data-name="Pleasant Street"></circle>
+      <text x="780" y="40" font-size="10" text-anchor="middle">Pleasant Street</text>
+
+      <circle class="station" cx="840" cy="50" r="5" data-name="Boston University West"></circle>
+      <text x="840" y="40" font-size="10" text-anchor="middle">BU West</text>
+
+      <circle class="station" cx="900" cy="50" r="5" data-name="Boston University Central"></circle>
+      <text x="900" y="40" font-size="10" text-anchor="middle">BU Central</text>
+
+      <circle class="station" cx="960" cy="50" r="5" data-name="Boston University East"></circle>
+      <text x="960" y="40" font-size="10" text-anchor="middle">BU East</text>
 
       <!-- Branch C -->
-      <line x1="50" y1="150" x2="900" y2="150" stroke="green" stroke-width="4" />
-      <circle class="station" cx="70" cy="150" r="8" data-name="Cleveland Circle" data-wait="6.3"></circle>
-      <circle class="station" cx="130" cy="150" r="8" data-name="Englewood Avenue" data-wait="7.1"></circle>
-      <circle class="station" cx="190" cy="150" r="8" data-name="Dean Road" data-wait="6.9"></circle>
-      <circle class="station" cx="250" cy="150" r="8" data-name="Tappan Street" data-wait="7.3"></circle>
-      <circle class="station" cx="310" cy="150" r="8" data-name="Washington Square" data-wait="6.8"></circle>
-      <circle class="station" cx="370" cy="150" r="8" data-name="Fairbanks Street" data-wait="7.0"></circle>
-      <circle class="station" cx="430" cy="150" r="8" data-name="Brandon Hall" data-wait="6.5"></circle>
-      <circle class="station" cx="490" cy="150" r="8" data-name="Summit Avenue" data-wait="7.1"></circle>
-      <circle class="station" cx="550" cy="150" r="8" data-name="Coolidge Corner" data-wait="7.4"></circle>
-      <circle class="station" cx="610" cy="150" r="8" data-name="Saint Paul Street" data-wait="7.8"></circle>
-      <circle class="station" cx="670" cy="150" r="8" data-name="Kent Street" data-wait="7.6"></circle>
-      <circle class="station" cx="730" cy="150" r="8" data-name="Hawes Street" data-wait="7.3"></circle>
-      <circle class="station" cx="790" cy="150" r="8" data-name="Saint Marys Street" data-wait="7.7"></circle>
+      <line x1="50" y1="150" x2="800" y2="150" stroke="green" stroke-width="6" />
+      <circle class="station" cx="60" cy="150" r="5" data-name="Cleveland Circle"></circle>
+      <text x="60" y="140" font-size="10" text-anchor="middle">Cleveland Circle</text>
 
-      <!-- Branch D -->
-      <line x1="50" y1="250" x2="900" y2="250" stroke="green" stroke-width="4" />
-      <circle class="station" cx="70" cy="250" r="8" data-name="Riverside" data-wait="5.9"></circle>
-      <circle class="station" cx="130" cy="250" r="8" data-name="Woodland" data-wait="6.1"></circle>
-      <circle class="station" cx="190" cy="250" r="8" data-name="Waban" data-wait="5.8"></circle>
-      <circle class="station" cx="250" cy="250" r="8" data-name="Eliot" data-wait="6.2"></circle>
-      <circle class="station" cx="310" cy="250" r="8" data-name="Newton Highlands" data-wait="6.0"></circle>
-      <circle class="station" cx="370" cy="250" r="8" data-name="Newton Centre" data-wait="6.4"></circle>
-      <circle class="station" cx="430" cy="250" r="8" data-name="Chestnut Hill" data-wait="6.7"></circle>
-      <circle class="station" cx="490" cy="250" r="8" data-name="Reservoir" data-wait="6.5"></circle>
-      <circle class="station" cx="550" cy="250" r="8" data-name="Beaconsfield" data-wait="6.9"></circle>
+      <circle class="station" cx="120" cy="150" r="5" data-name="Englewood Avenue"></circle>
+      <text x="120" y="140" font-size="10" text-anchor="middle">Englewood Ave</text>
 
-      <!-- Branch E -->
-      <line x1="50" y1="350" x2="900" y2="350" stroke="green" stroke-width="4" />
-      <circle class="station" cx="70" cy="350" r="8" data-name="Heath Street" data-wait="5.4"></circle>
-      <circle class="station" cx="130" cy="350" r="8" data-name="Back of the Hill" data-wait="5.8"></circle>
-      <circle class="station" cx="190" cy="350" r="8" data-name="Riverway" data-wait="6.3"></circle>
-      <circle class="station" cx="250" cy="350" r="8" data-name="Mission Park" data-wait="5.6"></circle>
-      <circle class="station" cx="310" cy="350" r="8" data-name="Fenwood Road" data-wait="5.9"></circle>
-      <circle class="station" cx="370" cy="350" r="8" data-name="Brigham Circle" data-wait="6.0"></circle>
-      <circle class="station" cx="430" cy="350" r="8" data-name="Longwood Medical Area" data-wait="6.5"></circle>
-      <circle class="station" cx="490" cy="350" r="8" data-name="Museum of Fine Arts" data-wait="
+      <circle class="station" cx="180" cy="150" r="5" data-name="Dean Road"></circle>
+      <text x="180" y="140" font-size="10" text-anchor="middle">Dean Road</text>
+
+      <circle class="station" cx="240" cy="150" r="5" data-name="Tappan Street"></circle>
+      <text x="240" y="140" font-size="10" text-anchor="middle">Tappan Street</text>
+
+      <circle class="station" cx="300" cy="150" r="5" data-name="Washington Square"></circle>
+      <text x="300" y="140" font-size="10" text-anchor="middle">Washington Sq</text>
+
+      <circle class="station" cx="360" cy="150" r="5" data-name="Fairbanks Street"></circle>
+      <text x="360" y="140" font-size="10" text-anchor="middle">Fairbanks St</text>
+
+      <circle class="station" cx="420" cy="150" r="5" data-name="Brandon Hall"></circle>
+      <text x="420" y="140" font-size="10" text-anchor="middle">Brandon Hall</text>
+
+      <circle class="station" cx="480" cy="150" r="5" data-name="Summit Avenue"></circle>
+      <text x="480" y="140" font-size="10" text-anchor="middle">Summit Ave</text>
+
+      <circle class="station" cx="540" cy="150" r="5" data-name="Coolidge Corner"></circle>
+      <text x="540" y="140" font-size="10" text-anchor="middle">Coolidge Corner</text>
+
+      <circle class="station" cx="600" cy="150" r="5" data-name="Saint Paul Street"></circle>
+      <text x="600" y="140" font-size="10" text-anchor="middle">Saint Paul St</text>
+
+      <!-- Continue adding remaining Branch C stations -->
+
+      <!-- Shared Central Stations -->
+      <line x1="850" y1="50" x2="1100" y2="200" stroke="green" stroke-width="6" />
+      <circle class="station" cx="860" cy="100" r="5" data-name="Kenmore"></circle>
+      <text x="860" y="90" font-size="10" text-anchor="middle">Kenmore</text>
+
+      <circle class="station" cx="920" cy="130" r="5" data-name="Hynes Convention Center"></circle>
+      <text x="920" y="120" font-size="10" text-anchor="middle">Hynes Convention Center</text>
+
+      <circle class="station" cx="980" cy="160" r="5" data-name="Copley"></circle>
+      <text x="980" y="150" font-size="10" text-anchor="middle">Copley</text>
+
+      <circle class="station" cx="1040" cy="190" r="5" data-name="Arlington"></circle>
+      <text x="1040" y="180" font-size="10" text-anchor="middle">Arlington</text>
+
+      <circle class="station" cx="1100" cy="220" r="5" data-name="Boylston"></circle>
+      <text x="1100" y="210" font-size="10" text-anchor="middle">Boylston</text>
+
+      <circle
+
 
 
