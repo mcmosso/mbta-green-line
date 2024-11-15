@@ -1,67 +1,53 @@
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #ffffff;
 }
 
-body, html {
-  height: 100%;
-  font-family: Arial, sans-serif;
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-#intro {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
 }
 
-#bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
+#text-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+.text-box {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-#scroll-content {
-  padding: 5vh 10%;
-  background-color: #f9f9f9;
+.text-box.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.step {
-  margin: 5vh 0;
-  opacity: 0.1;
-  transition: opacity 0.5s ease-in-out;
+button {
+    padding: 10px 20px;
+    background-color: #238748;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
 }
 
-.step.active {
-  opacity: 1;
-}
-
-#chart {
-  width: 100%;
-  height: 400px;
-}
-
-#map {
-  width: 100%;
-  height: 400px;
+button:hover {
+    background-color: #00ad3f;
 }
