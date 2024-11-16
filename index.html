@@ -64,13 +64,13 @@
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(50px); /* Start lower */
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
         .text-box.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0); /* Slide into view */
         }
 
         img {
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <!-- Section 2 -->
+     <!-- Section 2 -->
     <div class="parallax" id="section2">
         <div class="text-box">
             <p>According to data from the MBTA about gated entries, in September 2024, over 1.2 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.2 million.</p>
@@ -148,10 +148,18 @@
         </div>
     </div>
 
-    <!-- Section 10 -->
+    
+    <!-- Section 10: Background Image with Visible Picture and Text Scrolls Up -->
     <div class="background-section" style="background-image: url('https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg');">
         <div class="text-box">
             <p>The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However, for riders who’ve endured years of delays and stagnant service, it is fair to feel excitement mixed with warranted skepticism.</p>
+        </div>
+    </div>
+
+    <!-- Section 11 -->
+    <div class="parallax" id="section10">
+        <div class="text-box">
+            <p>If Boston is serious about being a modern, sustainable city, its transit system must evolve. The Green Line, steeped in history, must become a part of Boston’s future, not a relic of its past.</p>
         </div>
     </div>
 
@@ -162,7 +170,8 @@
                 const boxTop = box.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
 
-                if (boxTop < windowHeight - 100) {
+                // Reveal the text box when it's near the middle of the screen
+                if (boxTop < windowHeight - 150) {
                     box.classList.add('visible');
                 } else {
                     box.classList.remove('visible');
