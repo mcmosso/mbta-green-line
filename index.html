@@ -42,10 +42,10 @@
             justify-content: center;
         }
 
-        /* Fullscreen Image Section */
-        .fullscreen-image {
+        /* Section with Background Image and Overlayed Text */
+        .background-section {
             position: relative;
-            min-height: 100vh;
+            min-height: 80vh; /* Slightly smaller than full screen */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -54,14 +54,14 @@
             justify-content: center;
         }
 
-        /* Text Box Styling */
-        .text-box {
+        .background-section .text-box {
+            position: absolute;
+            z-index: 2;
+            max-width: 650px;
+            margin: auto;
             background: rgba(255, 255, 255, 0.9);
             color: #000;
-            max-width: 650px;
-            margin: 20px;
             padding: 30px;
-            text-align: center;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             opacity: 0;
@@ -69,9 +69,16 @@
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
-        .text-box.visible {
+        .background-section.visible .text-box {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -149,25 +156,40 @@
         </div>
     </div>
 
-    <!-- Section 11: Fullscreen Image -->
-    <div class="fullscreen-image" id="section11" style="background-image: url('https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg');">
-    </div>
-
-    <!-- Section 12 -->
-    <div class="parallax" id="section12">
+    <!-- Section 11: Background Image with Overlayed Text -->
+    <div class="background-section" style="background-image: url('https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg');">
         <div class="text-box">
             <p>The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However, for riders who’ve endured years of delays and stagnant service, it is fair to feel excitement mixed with warranted skepticism.</p>
         </div>
     </div>
 
-    <script>
-        function handleScroll() {
-            const textBoxes = document.querySelectorAll('.text-box');
-            textBoxes.forEach(box => {
-                const boxTop = box.getBoundingClientRect().top;
-                const boxBottom = box.getBoundingClientRect().bottom;
-                const windowHeight = window.innerHeight;
-                if (boxTop < windowHeight && boxBottom > 0) {
-                    box.classList.add('visible');
-                } else {
-                    box.classList.remove('visible
+    <!-- Section 12 -->
+    <div class="parallax" id="section12">
+        <div class="text-box">
+            <p>These challenges are solvable but urgent. Increasing train frequency during rush hours, modernizing fare collection to capture untapped ridership, and addressing infrastructure delays would dramatically improve service.</p>
+        </div>
+    </div>
+
+<script>
+    function handleScroll() {
+        const sections = document.querySelectorAll('.parallax, .background-section');
+        sections.forEach(section => {
+            const box = section.querySelector('.text-box');
+            const sectionTop = section.getBoundingClientRect().top;
+            const sectionBottom = section.getBoundingClientRect().bottom;
+            const windowHeight = window.innerHeight;
+
+            if (sectionTop < windowHeight && sectionBottom > 0) {
+                box.classList.add('visible');
+            } else {
+                box.classList.remove('visible');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+</script>
+
+</body>
+</html>
