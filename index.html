@@ -42,39 +42,6 @@
             justify-content: center;
         }
 
-        /* Placeholder Images */
-        #section1 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section2 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section3 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section4 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section5 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section6 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section7 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
-        #section8 {
-            background-image: url('https://via.placeholder.com/1200x800');
-        }
-
         /* Text Box Styling */
         .text-box {
             background: rgba(255, 255, 255, 0.9);
@@ -121,18 +88,72 @@
         </div>
     </div>
 
-    <!-- Additional Sections -->
+    <!-- Section 3 -->
+    <div class="parallax" id="section3">
+        <div class="text-box">
+            <p>Moreover, the MBTA’s gated entry data removes an estimated number of riders who transfer to the Red Line at Park Street, the Blue Line at Government Center, and other intersecting lines. This filtering is meant to clarify Green Line-specific ridership, but it also risks underestimating the true load on the system.</p>
+        </div>
+    </div>
+    
+    <!-- Section 4 -->
+    <div class="parallax" id="section4">
+        <div class="text-box">
+            <p>Yet, despite predictable increases in ridership, the Green Line operated with near-identical train frequencies to quieter summer months. Platforms overflowed at rush hour, trains arrived late, and passengers squeezed onto trains like sardines. September, with its unique mix of students returning and professionals back from summer, is Boston’s public transit stress test. For the Green Line, the numbers show that it failed—leaving riders waiting on platforms, crowding onto already-packed trains, and questioning whether the country’s oldest transit system can keep up with the modern city it needs to serve.</p>
+        </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="parallax" id="section5">
+        <div class="text-box">
+            <p>The data reveals a critical failure of the Green Line during rush hours: train frequencies remain nearly unchanged from off-peak periods. On average, trains arrive every 8 to 9 minutes, even during the busiest morning (7:00–9:00 AM) and evening (4:00–6:00 PM) peaks. For a transit system tasked with absorbing predictable demand surges, this stagnation results in overcrowded platforms and delayed commutes.</p>
+        </div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="parallax" id="section6">
+        <div class="text-box">
+            <p>At Park Street, the busiest station on the Green Line, over 150,000 gated entries were recorded during September. In the evening rush hour alone, half-hour intervals saw average entries exceeding 600 riders (predicted red line passengers were calculated out of data by MBTA). For comparison, a two-car Green Line train has a maximum capacity of approximately 300 passengers.</p>
+        </div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="parallax" id="section7">
+        <div class="text-box">
+            <p>Even as the data reveals critical flaws, it also highlights the limitations of the MBTA’s current metrics. Above-ground stops on the B, C, and E Lines are unmeasured due to outdated onboard payment systems. Additionally, gated entries represent only passengers entering the Green Line system—they do not account for direction. Approximately half of these riders are traveling eastbound (inbound) and the other half westbound (outbound).</p>
+        </div>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="parallax" id="section8">
+        <div class="text-box">
+            <p>The Green Line’s failures aren’t just inconveniences; they represent systemic risks for Boston. Transit inefficiencies increase commute times, disrupt productivity, and discourage public transit use, pushing more people into cars. This exacerbates traffic congestion, worsens air quality, and undermines the city’s climate goals.</p>
+        </div>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="parallax" id="section9">
+        <div class="text-box">
+            <p>These challenges are solvable but urgent. Increasing train frequency during rush hours, modernizing fare collection to capture untapped ridership, and addressing infrastructure delays would dramatically improve service.</p>
+        </div>
+    </div>
+    
+    <!-- Section 10 -->
+    <div class="parallax" id="section10">
+        <div class="text-box">
+            <p>If Boston is serious about being a modern, sustainable city, its transit system must evolve. The Green Line, steeped in history, must become a part of Boston’s future, not a relic of its past.</p>
+        </div>
+    </div>
 
     <!-- Section 11 -->
-    <div class="parallax" id="section5">
+    <div class="parallax" id="section11">
         <!-- Add Image Above the Text Box -->
         <div>
-            <img src="F2ILW2Z3TBHV5HSMTMBVFAZUBE.avif" alt="Green Line Image">
+            <img src="https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg" 
+                 alt="Green Line Train" 
+                 style="max-width: 100%; display: block; margin: 0 auto; border-radius: 10px;">
         </div>
         <div class="text-box">
-            <p>
-                The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However for riders who’ve endured years of delays and stagnant service, it is fair for riders to feel some excitement, mixed with warranted skepticism about a possible improved train system in the distant future. Promises, as any Boston commuter knows, don’t clear platforms.
-            </p>
+            <p>The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However for riders who’ve endured years of delays and stagnant service, it is fair for riders to feel some excitement, mixed with warranted skepticism about a possible improved train system in the distant future. Promises, as any Boston commuter knows, don’t clear platforms.</p>
         </div>
     </div>
 
@@ -144,23 +165,4 @@
             textBoxes.forEach(box => {
                 const boxTop = box.getBoundingClientRect().top;
                 const boxBottom = box.getBoundingClientRect().bottom;
-                const windowHeight = window.innerHeight;
-
-                if (boxTop < windowHeight && boxBottom > 0) {
-                    box.classList.add('visible');
-                } else {
-                    box.classList.remove('visible');
-                }
-            });
-        }
-
-        // Listen for scroll events
-        window.addEventListener('scroll', handleScroll);
-
-        // Trigger on page load to account for elements already in view
-        handleScroll();
-    </script>
-
-</body>
-</html>
-
+                const
