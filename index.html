@@ -99,11 +99,11 @@
         </div>
     </div>
 
- <!-- Section: Animated Bar Chart -->
-<div class="parallax" id="bar-chart-section" style="background-color: white; padding: 50px 0; text-align: center;">
+ <!-- Section: Centered Bar Chart -->
+<div style="background-color: white; padding: 50px 0; text-align: center;">
     <h2 style="color: black; margin-bottom: 20px;">Total Amount of Gated Entries Per Month</h2>
-    <div id="chart-container" style="display: flex; justify-content: center; align-items: center;">
-        <div id="chart" style="width: 100%; max-width: 700px;"></div>
+    <div id="chart-container" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <svg id="chart" style="width: 700px; height: 400px;"></svg>
     </div>
     <p style="font-size: 1rem; color: gray; margin-top: 20px;">Data source: MBTA</p>
 </div>
@@ -121,13 +121,11 @@
     // Chart dimensions
     const margin = { top: 20, right: 30, bottom: 50, left: 100 };
     const width = 600; // Adjusted width for centering
-    const height = 400;
+    const height = 300;
 
     // Create the SVG
     const svg = d3.select("#chart")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -183,7 +181,6 @@
         .style("font-size", "14px")
         .style("fill", "#000");
 </script>
-
 
     <!-- Section 3 -->
     <div class="parallax" id="section3">
