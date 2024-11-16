@@ -42,6 +42,18 @@
             justify-content: center;
         }
 
+        /* Fullscreen Image Section */
+        .fullscreen-image {
+            position: relative;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* Text Box Styling */
         .text-box {
             background: rgba(255, 255, 255, 0.9);
@@ -60,13 +72,6 @@
         .text-box.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-            margin: 20px auto;
-            border-radius: 10px;
         }
     </style>
 </head>
@@ -112,7 +117,7 @@
     <!-- Section 6 -->
     <div class="parallax" id="section6">
         <div class="text-box">
-            <p>At Park Street, the busiest station on the Green Line, over 150,000 gated entries were recorded during September. In the evening rush hour alone, half-hour intervals saw average entries exceeding 600 riders (predicted red line passengers were calculated out of data by MBTA). For comparison, a two-car Green Line train has a maximum capacity of approximately 300 passengers.</p>
+            <p>At Park Street, the busiest station on the Green Line, over 150,000 gated entries were recorded during September. In the evening rush hour alone, half-hour intervals saw average entries exceeding 600 riders (predicted Red Line passengers were calculated out of data by MBTA). For comparison, a two-car Green Line train has a maximum capacity of approximately 300 passengers.</p>
         </div>
     </div>
 
@@ -144,11 +149,12 @@
         </div>
     </div>
 
-    <!-- Section 11 -->
-    <div class="parallax" id="section11">
-        <div>
-            <img src="https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg" alt="Green Line Train">
-        </div>
+    <!-- Section 11: Fullscreen Image -->
+    <div class="fullscreen-image" id="section11" style="background-image: url('https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg');">
+    </div>
+
+    <!-- Section 12 -->
+    <div class="parallax" id="section12">
         <div class="text-box">
             <p>The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However, for riders who’ve endured years of delays and stagnant service, it is fair to feel excitement mixed with warranted skepticism.</p>
         </div>
@@ -164,14 +170,4 @@
                 if (boxTop < windowHeight && boxBottom > 0) {
                     box.classList.add('visible');
                 } else {
-                    box.classList.remove('visible');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-    </script>
-
-</body>
-</html>
+                    box.classList.remove('visible
