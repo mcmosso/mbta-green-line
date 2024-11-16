@@ -54,14 +54,13 @@
             justify-content: center;
         }
 
-        .background-section .text-box {
-            position: absolute;
-            z-index: 2;
-            max-width: 650px;
-            margin: auto;
+        .text-box {
             background: rgba(255, 255, 255, 0.9);
             color: #000;
+            max-width: 650px;
+            margin: 20px;
             padding: 30px;
+            text-align: center;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             opacity: 0;
@@ -69,7 +68,7 @@
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
-        .background-section.visible .text-box {
+        .text-box.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -150,46 +149,30 @@
     </div>
 
     <!-- Section 10 -->
-    <div class="parallax" id="section10">
-        <div class="text-box">
-            <p>If Boston is serious about being a modern, sustainable city, its transit system must evolve. The Green Line, steeped in history, must become a part of Boston’s future, not a relic of its past.</p>
-        </div>
-    </div>
-
-    <!-- Section 11: Background Image with Overlayed Text -->
     <div class="background-section" style="background-image: url('https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg');">
         <div class="text-box">
             <p>The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However, for riders who’ve endured years of delays and stagnant service, it is fair to feel excitement mixed with warranted skepticism.</p>
         </div>
     </div>
 
-    <!-- Section 12 -->
-    <div class="parallax" id="section12">
-        <div class="text-box">
-            <p>These challenges are solvable but urgent. Increasing train frequency during rush hours, modernizing fare collection to capture untapped ridership, and addressing infrastructure delays would dramatically improve service.</p>
-        </div>
-    </div>
+    <script>
+        function handleScroll() {
+            const textBoxes = document.querySelectorAll('.text-box');
+            textBoxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
 
-<script>
-    function handleScroll() {
-        const sections = document.querySelectorAll('.parallax, .background-section');
-        sections.forEach(section => {
-            const box = section.querySelector('.text-box');
-            const sectionTop = section.getBoundingClientRect().top;
-            const sectionBottom = section.getBoundingClientRect().bottom;
-            const windowHeight = window.innerHeight;
+                if (boxTop < windowHeight - 100) {
+                    box.classList.add('visible');
+                } else {
+                    box.classList.remove('visible');
+                }
+            });
+        }
 
-            if (sectionTop < windowHeight && sectionBottom > 0) {
-                box.classList.add('visible');
-            } else {
-                box.classList.remove('visible');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-</script>
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+    </script>
 
 </body>
 </html>
