@@ -99,10 +99,10 @@
         </div>
     </div>
 
-    <!-- Section: Animated Bar Chart -->
-<div class="parallax" id="bar-chart-section">
-    <h2 style="text-align: center; color: white; margin-bottom: 20px;">Total Amount of Gated Entries Per Month</h2>
-    <div id="chart" class="chart-container scroll-anim"></div>
+    <<!-- Section: Animated Bar Chart -->
+<div class="parallax" id="bar-chart-section" style="background-color: white; padding: 50px 0;">
+    <h2 style="text-align: center; color: black; margin-bottom: 20px;">Total Amount of Gated Entries Per Month</h2>
+    <div id="chart" class="chart-container" style="display: flex; justify-content: center;"></div>
 </div>
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -117,8 +117,8 @@
 
     // Chart dimensions
     const margin = { top: 20, right: 20, bottom: 40, left: 100 };
-    const width = 800 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const width = 600; // Adjusted for better centering
+    const height = 300; // Adjusted for better centering
 
     // Create the SVG
     const svg = d3.select("#chart")
@@ -189,6 +189,7 @@
 
     observer.observe(chartContainer);
 </script>
+
 
     <!-- Section 3 -->
     <div class="parallax" id="section3">
