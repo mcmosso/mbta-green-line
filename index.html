@@ -95,9 +95,100 @@
      <!-- Section 2 -->
     <div class="parallax" id="section2">
         <div class="text-box">
-            <p>According to data from the MBTA about gated entries, in September 2024, over 1.2 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.2 million.</p>
+            <p>According to data from the MBTA about gated entries, in September 2024, over 1.5 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.2 million.</p>
         </div>
     </div>
+
+    <!-- Section: Animated Bar Chart -->
+<div class="parallax" id="bar-chart-section">
+    <h2 style="text-align: center; color: white; margin-bottom: 20px;">Total Amount of Gated Entries Per Month</h2>
+    <div id="chart" class="chart-container scroll-anim"></div>
+</div>
+
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script>
+    // Data for the chart
+    const data = [
+        { month: "June", entries: 1496572 },
+        { month: "July", entries: 1377880 },
+        { month: "August", entries: 1459179 },
+        { month: "September", entries: 1572163 }
+    ];
+
+    // Chart dimensions
+    const margin = { top: 20, right: 20, bottom: 40, left: 100 };
+    const width = 800 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    // Create the SVG
+    const svg = d3.select("#chart")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Create scales
+    const x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.entries)])
+        .range([0, width]);
+
+    const y = d3.scaleBand()
+        .domain(data.map(d => d.month))
+        .range([0, height])
+        .padding(0.1);
+
+    // Add axes
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).ticks(5));
+
+    // Add bars
+    const bars = svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("y", d => y(d.month))
+        .attr("height", y.bandwidth())
+        .attr("x", 0)
+        .attr("width", 0) // Start with 0 width for animation
+        .style("fill", "#4CAF50");
+
+    // Animate the bars on scroll
+    const animateBars = () => {
+        bars.transition()
+            .duration(1000)
+            .attr("width", d => x(d.entries));
+    };
+
+    // Add value labels on bars
+    svg.selectAll(".value")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("class", "value")
+        .attr("x", d => x(d.entries) + 5)
+        .attr("y", d => y(d.month) + y.bandwidth() / 2)
+        .attr("dy", ".35em")
+        .text(d => d.entries.toLocaleString());
+
+    // Observe when the chart comes into view
+    const chartContainer = document.getElementById("chart");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                chartContainer.classList.add("visible");
+                animateBars();
+            }
+        });
+    });
+
+    observer.observe(chartContainer);
+</script>
 
     <!-- Section 3 -->
     <div class="parallax" id="section3">
