@@ -99,11 +99,11 @@
         </div>
     </div>
 
- <!-- Section: Centered Bar Chart -->
+<!-- Centered Chart Section -->
 <div style="background-color: white; padding: 50px 0; text-align: center;">
     <h2 style="color: black; margin-bottom: 20px;">Total Amount of Gated Entries Per Month</h2>
-    <div id="chart-container" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-        <svg id="chart" style="width: 700px; height: 400px;"></svg>
+    <div style="display: flex; justify-content: center;">
+        <svg id="chart" width="800" height="400"></svg>
     </div>
     <p style="font-size: 1rem; color: gray; margin-top: 20px;">Data source: MBTA</p>
 </div>
@@ -119,8 +119,8 @@
     ];
 
     // Chart dimensions
-    const margin = { top: 20, right: 30, bottom: 50, left: 100 };
-    const width = 600; // Adjusted width for centering
+    const margin = { top: 20, right: 50, bottom: 50, left: 120 }; // Added padding to prevent cutoff
+    const width = 600;
     const height = 300;
 
     // Create the SVG
@@ -131,7 +131,7 @@
 
     // Create scales
     const x = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.entries)])
+        .domain([0, d3.max(data, d => d.entries) * 1.1]) // Added buffer for better spacing
         .range([0, width]);
 
     const y = d3.scaleBand()
@@ -141,14 +141,14 @@
 
     // Add Y-axis (months)
     svg.append("g")
-        .call(d3.axisLeft(y).tickSizeOuter(0));
+        .call(d3.axisLeft(y).tickSizeOuter(0))
+        .style("font-size", "14px");
 
     // Add X-axis (values)
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format(",")).tickSizeOuter(0))
-        .selectAll("text")
-        .style("text-anchor", "middle");
+        .style("font-size", "14px");
 
     // Add bars
     svg.selectAll(".bar")
@@ -168,18 +168,19 @@
         .duration(1000)
         .attr("width", d => x(d.entries));
 
-    // Add value labels
+    // Add value labels (on the bars)
     svg.selectAll(".value")
         .data(data)
         .enter()
         .append("text")
         .attr("class", "value")
-        .attr("x", d => x(d.entries) + 5)
+        .attr("x", d => x(d.entries) - 10) // Position labels inside the bar
         .attr("y", d => y(d.month) + y.bandwidth() / 2)
         .attr("dy", ".35em")
         .text(d => d.entries.toLocaleString())
-        .style("font-size", "14px")
-        .style("fill", "#000");
+        .style("font-size", "12px")
+        .style("fill", "white")
+        .style("text-anchor", "end"); // Align text inside bars
 </script>
 
     <!-- Section 3 -->
