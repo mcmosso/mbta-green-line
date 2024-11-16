@@ -13,54 +13,71 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
             color: #fff;
-            background-color: #008000; /* Consistent green background */
+            background: #008000;
         }
 
-        h1, h2 {
+        h1 {
+            font-size: 3rem;
             text-align: center;
+            padding: 20px 20px 0;
             color: #fff;
+            font-weight: 600;
         }
 
         p {
             font-size: 1.25rem;
             line-height: 1.8;
-            color: #fff;
         }
 
-        /* Floating Content Boxes */
-        .content-box {
-            background: rgba(255, 255, 255, 0.9); /* White with transparency */
+        /* Fullscreen Section for Parallax Effect */
+        .parallax {
+            position: relative;
+            min-height: 100vh;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Section with Background Image and Overlayed Text */
+        .background-section {
+            position: relative;
+            min-height: 80vh; /* Slightly smaller than full screen */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-box {
+            background: rgba(255, 255, 255, 0.9);
             color: #000;
             max-width: 650px;
-            margin: 20px auto;
+            margin: 20px;
             padding: 30px;
             text-align: center;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Chart Container */
-        #chart-container {
-            max-width: 700px;
-            margin: 20px auto;
-        }
-
-        .caption {
-            text-align: center;
-            color: white;
-            font-size: 1rem;
-        }
-
-        /* Scroll Animation for Text Boxes */
-        .content-box {
             opacity: 0;
             transform: translateY(50px); /* Start lower */
             transition: opacity 1s ease-out, transform 1s ease-out;
         }
 
-        .content-box.visible {
+        .text-box.visible {
             opacity: 1;
             transform: translateY(0); /* Slide into view */
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -137,16 +154,6 @@
         <p class="caption">Data source: MBTA</p>
     </div>
 
-   <!-- Chart Section -->
-    <div class="content-box">
-        <h2>Total Amount of Gated Entries Per Month</h2>
-        <div id="chart-container">
-            <svg id="chart"></svg>
-            <p class="caption">Data source: MBTA</p>
-        </div>
-    </div>
-
-    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
         // Data for the chart
         const data = [
@@ -158,18 +165,18 @@
 
         // Chart dimensions
         const margin = { top: 20, right: 30, bottom: 50, left: 120 };
-        const width = 600;
-        const height = 300;
+        const width = 600; // Chart width
+        const height = 300; // Chart height
 
-        // Create SVG container
+        // Create the SVG container
         const svg = d3.select("#chart")
             .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        // Scales
+        // Create scales
         const x = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.entries) * 1.1]) // Buffer
+            .domain([0, d3.max(data, d => d.entries) * 1.1]) // Add buffer to avoid cut-off
             .range([0, width]);
 
         const y = d3.scaleBand()
@@ -177,43 +184,52 @@
             .range([0, height])
             .padding(0.1);
 
-        // Add axes
+        // Add Y-axis (months)
         svg.append("g")
             .call(d3.axisLeft(y).tickSizeOuter(0))
             .style("font-size", "14px");
 
+        // Add X-axis (values)
         svg.append("g")
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format(",")).tickSizeOuter(0))
             .style("font-size", "14px");
 
-        // Bars
+        // Add bars
         svg.selectAll(".bar")
             .data(data)
             .enter()
             .append("rect")
+            .attr("class", "bar")
             .attr("y", d => y(d.month))
             .attr("height", y.bandwidth())
             .attr("x", 0)
-            .attr("width", 0) // Animation
-            .style("fill", "#4CAF50")
+            .attr("width", 0) // Start with 0 width for animation
+            .style("fill", "#4CAF50");
+
+        // Animate the bars
+        svg.selectAll(".bar")
             .transition()
             .duration(1000)
             .attr("width", d => x(d.entries));
 
-        // Labels
-        svg.selectAll(".label")
+        // Add value labels
+        svg.selectAll(".value")
             .data(data)
             .enter()
             .append("text")
-            .attr("x", d => x(d.entries) - 10)
+            .attr("class", "value")
+            .attr("x", d => x(d.entries) - 10) // Position labels inside the bars
             .attr("y", d => y(d.month) + y.bandwidth() / 2)
             .attr("dy", ".35em")
             .text(d => d.entries.toLocaleString())
             .style("font-size", "12px")
             .style("fill", "white")
-            .style("text-anchor", "end");
+            .style("text-anchor", "end"); // Align text inside bars
     </script>
+</body>
+</html>
+
 
     <!-- Section 3 -->
     <div class="parallax" id="section3">
