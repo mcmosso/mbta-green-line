@@ -116,8 +116,8 @@
     ];
 
     // Chart dimensions
-    const margin = { top: 20, right: 50, bottom: 40, left: 50 };
-    const width = 900; // Ensure the chart is smaller for centering
+    const margin = { top: 20, right: 50, bottom: 40, left: 100 };
+    const width = 800; // Adjusted for proper centering
     const height = 400;
 
     // Create the SVG
@@ -140,11 +140,13 @@
 
     // Add axes
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).tickSize(0).tickPadding(10));
 
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x).ticks(5));
+        .call(d3.axisBottom(x).ticks(5))
+        .selectAll("text")
+        .style("text-anchor", "middle");
 
     // Add bars
     const bars = svg.selectAll(".bar")
@@ -174,7 +176,9 @@
         .attr("x", d => x(d.entries) + 5)
         .attr("y", d => y(d.month) + y.bandwidth() / 2)
         .attr("dy", ".35em")
-        .text(d => d.entries.toLocaleString());
+        .text(d => d.entries.toLocaleString())
+        .style("font-size", "12px")
+        .style("fill", "#000");
 
     // Observe when the chart comes into view
     const chartContainer = document.getElementById("chart");
@@ -189,6 +193,7 @@
 
     observer.observe(chartContainer);
 </script>
+
 
     <!-- Section 3 -->
     <div class="parallax" id="section3">
