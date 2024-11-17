@@ -19,7 +19,7 @@
         h1 {
             font-size: 3rem;
             text-align: center;
-            padding: 20px 20px 0;
+            padding: 20px;
             color: #fff;
             font-weight: 600;
         }
@@ -30,7 +30,6 @@
             text-align: center;
         }
 
-        /* Fullscreen Section for Parallax Effect */
         .parallax {
             position: relative;
             min-height: 100vh;
@@ -54,11 +53,18 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-            margin: 20px auto;
-            border-radius: 10px;
+        /* Bar Chart Container */
+        #chart-container {
+            width: 80%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #chart {
+            height: 400px;
         }
 
         /* Heatmap Grid Container */
@@ -77,42 +83,29 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-
-        /* Bar chart container */
-        #chart-container {
-            width: 80%;
-            margin: 50px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #chart {
-            height: 400px;
-        }
     </style>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
 <body>
 
-    <h1>The Green Line’s Breaking Point: What September Reveals About Boston’s Transit Failures</h1>
+    <h1>The Green Line’s Breaking Point</h1>
 
     <!-- Section 1 -->
     <div class="parallax" id="section1">
         <div class="text-box">
-            <p>Rush hour on the Green Line is a Bostonian’s definition of frustration. At Prudential, the platform crowds with commuters, students, and shoppers as another two-car train pulls in. To no one's surprise, it’s already packed to capacity. A few determined riders squeeze on, but the rest wait, hoping the next train will hopefully have space.</p>
+            <p>Rush hour on the Green Line is a Bostonian’s definition of frustration. At Prudential, the platform crowds with commuters, students, and shoppers as another two-car train pulls in. To no one's surprise, it’s already packed to capacity. A few determined riders squeeze on, but the rest wait, hoping the next train will have space.</p>
         </div>
     </div>
 
-     <!-- Section 2 -->
+    <!-- Section 2 -->
     <div class="parallax" id="section2">
         <div class="text-box">
-            <p>According to data from the MBTA about gated entries, in September 2024, over 1.5 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. A gated entry is recorded when a passenger taps their card or pays a fare at an underground station. But these numbers tell only part of the story. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.5 million.</p>
+            <p>According to data from the MBTA about gated entries, in September 2024, over 1.5 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.5 million.</p>
         </div>
     </div>
 
- <div id="chart-container">
+    <!-- Bar Chart Section -->
+    <div id="chart-container">
         <h2>Total Amount of Gated Entries Per Month</h2>
         <svg id="chart"></svg>
         <p class="caption">Data source: MBTA</p>
@@ -180,7 +173,36 @@
             .style("fill", "white")
             .style("text-anchor", "end");
     </script>
-    
+
+    <!-- Heatmaps Section -->
+    <div class="parallax" id="section3">
+        <div class="text-box">
+            <p>Interestingly enough, the average wait time for a Green Line train did not change during rush hour. See the heatmaps below for the average wait time at each station, depending on the hour, with dark green indicating shorter wait times and lighter colors indicating longer waits.</p>
+        </div>
+    </div>
+
+    <div class="heatmap-container">
+        <div>
+            <h2>Heatmap Group 1</h2>
+            <iframe src="heatmap_group1.html"></iframe>
+        </div>
+        <div>
+            <h2>Heatmap Group 2</h2>
+            <iframe src="heatmap_group2.html"></iframe>
+        </div>
+        <div>
+            <h2>Heatmap Group 3</h2>
+            <iframe src="heatmap_group3.html"></iframe>
+        </div>
+        <div>
+            <h2>Heatmap Group 4</h2>
+            <iframe src="heatmap_group4.html"></iframe>
+        </div>
+    </div>
+
+</body>
+</html>
+
     <!-- Section 3 -->
     <div class="parallax" id="section3">
         <div class="text-box">
@@ -193,8 +215,8 @@
         <div class="text-box">
             <p>On average the green line operates with a train coming every 7-8 minutes. Interestingly enough, when looking at the times trains came into each station, the averge wait time for a green line train did not change during rush hour. See the heatmaps below for the average wait at each station, depending on the hour, with the dark green indicating less of a wait time, and the lighter indicatig more of a wait time.</p>
         </div>
-
-     <div class="heatmap-container">
+        
+    <div class="heatmap-container">
         <div>
             <h2>Heatmap Group 1</h2>
             <iframe src="heatmap_group1.html"></iframe>
