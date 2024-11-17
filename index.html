@@ -79,6 +79,26 @@
             margin: 20px auto;
             border-radius: 10px;
         }
+        /* Heatmap Grid Container */
+.heatmap-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two heatmaps per row */
+    gap: 20px; /* Space between heatmaps */
+    padding: 20px;
+}
+
+/* Individual Heatmap Styling */
+.heatmap {
+    text-align: center;
+}
+
+.heatmap iframe {
+    width: 100%; /* Take full width of the container */
+    height: 600px; /* Increased height for better visibility */
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Slightly rounded corners */
+}
     </style>
 </head>
 <body>
