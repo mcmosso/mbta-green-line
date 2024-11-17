@@ -3,113 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> What September Reveals About Boston’s Green Line's Transit Failures </title>
+    <title>What September Reveals About Boston’s Green Line's Transit Failures</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
         body, html {
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
             color: #fff;
-            background: #008000;
+            background: #f0f0f0;
+            scroll-behavior: smooth;
         }
 
+        .section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .section img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .text-box {
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            max-width: 800px;
+            margin: 20px;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-in-out;
+        }
+
+        .text-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        /* Section Titles */
         h1 {
             font-size: 3rem;
-            text-align: center;
-            padding: 20px;
-            color: #fff;
             font-weight: 600;
+            margin-bottom: 20px;
         }
 
         p {
             font-size: 1.25rem;
             line-height: 1.8;
-            text-align: center;
-            padding: 0 20px;
         }
 
-        .parallax {
-            position: relative;
-            min-height: 80vh;
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
+        /* Heatmap Container */
+        .heatmap-container {
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
+            gap: 20px;
+            padding: 40px;
         }
 
-        .text-box {
-            background: rgba(255, 255, 255, 0.9);
-            color: #000;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            text-align: center;
+        .heatmap {
+            width: 45%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .heatmap iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Bar Chart Container */
-        #chart-container {
-            width: 80%;
-            margin: 50px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        #chart {
-            height: 400px;
-        }
-
-       <style>
-    /* Heatmap Grid Container */
-    .heatmap-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two heatmaps per row */
-        gap: 40px; /* Larger space between heatmaps */
-        padding: 40px; /* More padding around the container */
-    }
-
-    .heatmap iframe {
-        width: 100%;
-        height: 1400px; /* Larger height for better visibility */
-        border: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 12px;
-    }
-       
     </style>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function handleScroll() {
+                const textBoxes = document.querySelectorAll('.text-box');
+                textBoxes.forEach(box => {
+                    const boxTop = box.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (boxTop < windowHeight - 150) {
+                        box.classList.add('visible');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll();
+        });
+    </script>
 </head>
 <body>
 
-    <h1>The Green Line’s Breaking Point</h1>
-
-    <!-- Section 1 -->
-    <div class="parallax" id="section1">
+    <div class="section" id="section1">
+        <img src="https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg" alt="Green Line Train">
         <div class="text-box">
+            <h1>The Green Line’s Breaking Point</h1>
             <p>Rush hour on the Green Line is a Bostonian’s definition of frustration. At Prudential, the platform crowds with commuters, students, and shoppers as another two-car train pulls in. To no one's surprise, it’s already packed to capacity. A few determined riders squeeze on, but the rest wait, hoping the next train will have space.</p>
         </div>
     </div>
 
-    <!-- Section 2 -->
-    <div class="parallax" id="section2">
+    <div class="section" id="section2">
+        <img src="https://your-image-link.com/green-line-crowds.jpg" alt="Crowded Green Line Station">
         <div class="text-box">
             <p>According to data from the MBTA about gated entries, in September 2024, over 1.5 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.5 million.</p>
         </div>
     </div>
 
-    <!-- Bar Chart Section -->
-    <div id="chart-container">
-        <h2>Total Amount of Gated Entries Per Month</h2>
-        <svg id="chart"></svg>
-        <p class="caption">Data source: MBTA</p>
+    <div class="section" id="chart-section">
+        <img src="https://your-image-link.com/green-line-chart-bg.jpg" alt="Green Line Chart Background">
+        <div class="text-box">
+            <h2>Total Amount of Gated Entries Per Month</h2>
+            <svg id="chart"></svg>
+            <p class="caption">Data source: MBTA</p>
+        </div>
     </div>
 
     <script>
@@ -176,95 +204,66 @@
     </script>
 
     <!-- Heatmaps Section -->
-    <div class="parallax" id="section3">
+    <div class="section" id="heatmaps">
+        <img src="https://your-image-link.com/green-line-wait.jpg" alt="Green Line Wait Times">
         <div class="text-box">
             <p>Interestingly enough, the average wait time for a Green Line train did not change during rush hour. See the heatmaps below for the average wait time at each station, depending on the hour, with dark green indicating shorter wait times and lighter colors indicating longer waits.</p>
         </div>
     </div>
 
-   <div class="heatmap-container">
-    <!-- Row 1 -->
-    <div>
-        <h2 style="text-align: center;">Heatmap Group 1</h2>
-        <iframe src="heatmap_group1.html"></iframe>
+    <div class="heatmap-container">
+        <div class="heatmap">
+            <h2>Heatmap Group 1</h2>
+            <iframe src="heatmap_group1.html"></iframe>
+        </div>
+        <div class="heatmap">
+            <h2>Heatmap Group 2</h2>
+            <iframe src="heatmap_group2.html"></iframe>
+        </div>
+        <div class="heatmap">
+            <h2>Heatmap Group 3</h2>
+            <iframe src="heatmap_group3.html"></iframe>
+        </div>
+        <div class="heatmap">
+            <h2>Heatmap Group 4</h2>
+            <iframe src="heatmap_group4.html"></iframe>
+        </div>
     </div>
-    <div>
-        <h2 style="text-align: center;">Heatmap Group 2</h2>
-        <iframe src="heatmap_group2.html"></iframe>
-    </div>
-
-    <!-- Row 2 -->
-    <div>
-        <h2 style="text-align: center;">Heatmap Group 3</h2>
-        <iframe src="heatmap_group3.html"></iframe>
-    </div>
-    <div>
-        <h2 style="text-align: center;">Heatmap Group 4</h2>
-        <iframe src="heatmap_group4.html"></iframe>
-    </div>
-</div>
 
     <!-- Remaining Sections -->
-    <div class="parallax" id="section5">
-        <div class="text-box">
-            <p>The data reveals a critical failure of the Green Line during rush hours: train frequencies remain nearly unchanged from off-peak periods. On average, trains arrive every 8 to 9 minutes, even during the busiest morning (7:00–9:00 AM) and evening (4:00–6:00 PM) peaks.</p>
-        </div>
-    </div>
-
-    <div class="parallax" id="section6">
-        <div class="text-box">
-            <p>It is also important to note that stations like Copley, Arlington, and North Station have multiple lines (B, C, D, E) that travel through the station, so these times do not accurately reflect the time you would be waiting depending on where you are going.</p>
-        </div>
-    </div>
-
-    <div class="parallax" id="section7">
+    <div class="section" id="section3">
+        <img src="https://your-image-link.com/green-line-failures.jpg" alt="Green Line Challenges">
         <div class="text-box">
             <p>The Green Line’s failures aren’t just inconveniences; they represent systemic risks for Boston. Transit inefficiencies increase commute times, disrupt productivity, and discourage public transit use, pushing more people into cars. This exacerbates traffic congestion, worsens air quality, and undermines the city’s climate goals.</p>
         </div>
     </div>
 
-    <!-- Section 8 -->
-    <div class="parallax" id="section8">
+    <div class="section" id="section4">
+        <div class="text-box">
+            <p>It is also important to note that stations like Copley, Arlington, and North Station have multiple lines (B, C, D, E) that travel through the station, so these times do not accurately reflect the time you would be waiting depending on where you are going.</p>
+        </div>
+    </div>
+
+    <div class="section" id="section5">
         <div class="text-box">
             <p>The MBTA says: "We consider a prediction to be accurate when a train or bus arrives within minutes of a prediction. The exact number of minutes depends on how far out into the future a prediction is." Even as the data reveals critical flaws, it also highlights the limitations of the MBTA’s current metrics. Above-ground stops on the B, C, and E Lines are unmeasured due to outdated onboard payment systems. Additionally, gated entries represent only passengers entering the Green Line system—they do not account for direction. Approximately half of these riders are traveling eastbound (inbound) and the other half westbound (outbound).</p>
         </div>
     </div>
 
-    <!-- Section 9 -->
-    <div class="parallax" id="section9">
+    <div class="section" id="section6">
         <div class="text-box">
             <p>The Green Line’s challenges are solvable but urgent. Increasing train frequency during rush hours, modernizing fare collection to capture untapped ridership, and addressing infrastructure delays would dramatically improve service. If Boston is serious about being a modern, sustainable city, its transit system must evolve. The Green Line, steeped in history, must become a part of Boston’s future, not a relic of its past.</p>
         </div>
     </div>
 
     <!-- Section 10: Background Image -->
-    <div class="background-section" style="background-image: url('https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg');">
+    <div class="section" id="section10">
+        <img src="https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg" alt="New Green Line Train">
         <div class="text-box">
             <p>The MBTA has promised relief in the form of sleek new Green Line trains, set to debut by 2027, with larger cars capable of carrying nearly 300 passengers each. These updates are being hailed as a long-overdue fix to an overcrowded system. However, for riders who’ve endured years of delays and stagnant service, it is fair to feel excitement mixed with warranted skepticism.</p>
         </div>
     </div>
 
-    <script>
-        function handleScroll() {
-            const textBoxes = document.querySelectorAll('.text-box');
-            textBoxes.forEach(box => {
-                const boxTop = box.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                // Reveal the text box when it's near the middle of the screen
-                if (boxTop < windowHeight - 300) {
-                    box.classList.add('visible');
-                } else {
-                    box.classList.remove('visible');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-    </script>
-
 </body>
 </html>
-
 
