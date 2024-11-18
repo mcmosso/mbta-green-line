@@ -73,22 +73,21 @@
 
         /* Heatmap Container */
         .heatmap-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            justify-items: center;
             padding: 40px;
         }
 
         .heatmap {
-            width: 45%;
-            max-width: 500px;
-            margin-bottom: 20px;
+            width: 90%;
+            max-width: 600px;
         }
 
         .heatmap iframe {
-            width: 90%;
-            height: 500px;
+            width: 100%;
+            height: 600px;
             border: none;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -117,7 +116,7 @@
 <body>
 
     <div class="section" id="section1">
-        <img src="https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg" alt="Green Line Train">
+        <img src="/mnt/data/IMG_6950.HEIC" alt="Beginning Image">
         <div class="text-box">
             <h1>The Green Line’s Breaking Point</h1>
             <p>Rush hour on the Green Line is a Bostonian’s definition of frustration. At Prudential, the platform crowds with commuters, students, and shoppers as another two-car train pulls in. To no one's surprise, it’s already packed to capacity. A few determined riders squeeze on, but the rest wait, hoping the next train will have space.</p>
@@ -125,7 +124,7 @@
     </div>
 
     <div class="section" id="section2">
-        <img src="https://your-image-link.com/green-line-crowds.jpg" alt="Crowded Green Line Station">
+        <img src="/mnt/data/IMG_9627.HEIC" alt="Crowded Green Line Station">
         <div class="text-box">
             <p>According to data from the MBTA about gated entries, in September 2024, over 1.5 million passengers entered gated Green Line stations, a surge driven by returning students and a revitalized post-pandemic city. Above-ground stops, particularly on the B, C, and E Lines, rely on onboard fare collection, meaning untapped entries aren’t counted, bringing the number to well over 1.5 million.</p>
         </div>
@@ -230,6 +229,14 @@
         </div>
     </div>
 
+    <!-- Remaining Sections -->
+    <div class="section" id="section3">
+        <img src="https://your-image-link.com/green-line-failures.jpg" alt="Green Line Challenges">
+        <div class="text-box">
+            <p>The Green Line’s failures aren’t just inconveniences; they represent systemic risks for Boston. Transit inefficiencies increase commute times, disrupt productivity, and discourage public transit use, pushing more people into cars. This exacerbates traffic congestion, worsens air quality, and undermines the city’s climate goals.</p>
+        </div>
+    </div>
+
     <div class="section" id="section4">
         <div class="text-box">
             <p>It is also important to note that stations like Copley, Arlington, and North Station have multiple lines (B, C, D, E) that travel through the station, so these times do not accurately reflect the time you would be waiting depending on where you are going.</p>
@@ -258,4 +265,3 @@
 
 </body>
 </html>
-
