@@ -282,8 +282,7 @@
             { line: "Green Line E", accuracy: 66 }
         ];
 
-        // Adjusted margins to prevent cutting off the right side
-        const margin = { top: 40, right: 60, bottom: 50, left: 60 };
+        const margin = { top: 40, right: 50, bottom: 50, left: 60 };
         const width = 600 - margin.left - margin.right;
         const height = 400 - margin.top - margin.bottom;
 
@@ -321,6 +320,31 @@
             .selectAll("text")
             .style("fill", "black");  // Set axis labels to black
 
+        // Line Generator
+        const line = d3.line()
+            .x(d => x(d.line) + x.bandwidth() / 2)
+            .y(d => y(d.accuracy))
+            .curve(d3.curveMonotoneX);  // Smooth line
+
+        // Add Line Path
+        svg2.append("path")
+            .datum(chartData)
+            .attr("fill", "none")
+            .attr("stroke", "#4CAF50")
+            .attr("stroke-width", 2)
+            .attr("d", line);
+
+        // Circles for Data Points
+        svg2.selectAll(".dot")
+            .data(chartData)
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", d => x(d.line) + x.bandwidth() / 2)
+            .attr("cy", d => y(d.accuracy))
+            .attr("r", 5)
+            .attr("fill", "#4CAF50");
+
         // Bars
         svg2.selectAll(".bar")
             .data(chartData)
@@ -331,7 +355,8 @@
             .attr("y", d => y(d.accuracy))
             .attr("width", x.bandwidth())
             .attr("height", d => height - y(d.accuracy))
-            .attr("fill", "#4CAF50");
+            .attr("fill", "#4CAF50")
+            .attr("opacity", 0.8);
 
         // Labels
         svg2.selectAll(".label")
