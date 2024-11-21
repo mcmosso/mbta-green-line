@@ -128,14 +128,14 @@
      <div class="section" id="section1">
         <img src="IMG_2238.png">
         <div class="text-box">
-            <p>““The Green Line is by far the most complicated line,” says Seth Kaplan, a labs co-lead from TransitMatters, an organization dedicated to analyzing transit data and improving public transit in Boston. Kaplan points to the challenges created by the Green Line’s intricate design, where multiple branches converge into a single trunk line with just one track in each direction. This design leaves little room for flexibility during disruptions. “If a train is stuck at Copley, every train behind it isn’t going anywhere.”.</p>
+            <p>““The Green Line is by far the most complicated line,” says Seth Kaplan, a labs co-lead from TransitMatters, an organization dedicated to analyzing transit data and improving public transit in Boston. Kaplan points to the challenges created by the Green Line’s intricate design, where multiple branches converge into a single file line with just one track in each direction. This design leaves little room for flexibility during disruptions. “If a train is stuck at Copley, every train behind it isn’t going anywhere.”.</p>
         </div>
     </div>
 
     <div class="section" id="section2">
         <img src="IMG_9627.png">
         <div class="text-box">
-            <p>In September 2024, over 1.5 million passengers entered gated Green Line stations, a surge fueled by returning students and a revitalized post-pandemic city. However, these figures tell only part of the story. Above-ground stops on the B, C, D, and E Lines rely on onboard fare collection, meaning untapped entries aren’t counted, potentially adding thousands more riders to the system.</p>
+            <p>In September 2024, over 1.5 million passengers entered gated Green Line stations, a surge fueled by returning students and a revitalized post-pandemic city. However, these figures tell only part of the story. Above-ground stops on the B, C, D, and E Lines rely on onboard fare collection, meaning untapped entries aren’t counted, potentially adding thousands more riders to the system who are evading the fares.</p>
         </div>
     </div>
 
@@ -214,7 +214,7 @@
  <div class="section" id="section2">
         <img src="IMG_6960.png">
         <div class="text-box">
-            <p>Riders are fed up with overcrowded trains and unreliable wait times. "I had to take the green line during the month the orange line was down, and I really experienced a horrible time with the green line" says one rider who believes the train is far too crowded, especially during peak times. See the full interview below:</p>
+            <p>The Green Line is vital to Boston's transit system, but riders are fed up with overcrowded trains and unreliable wait times. "I had to take the green line during the month the orange line was down, and I really experienced a horrible time with the green line" says one rider who believes the train is far too crowded, especially during rush hour peak times. See the full interview below:</p>
         </div>
     </div>
 
@@ -227,7 +227,7 @@
     <div class="section" id="heatmaps">
         <img src="IMG_6959.png">
         <div class="text-box">
-            <p>Interestingly enough, the average wait time for a Green Line train did not change during rush hour. See the heatmaps below for the average wait time at each station, depending on the hour, with dark green indicating shorter wait times and lighter colors indicating longer waits.</p>
+            <p>When analyzing data from the MBTA, something interesting was noticed. The average wait time for a Green Line train barely changed during rush hour, even though tapped entries saw a spike of ridership. See the heatmaps below for the average wait time at each station, depending on the hour, with dark green indicating shorter wait times and lighter colors indicating longer waits.</p>
         </div>
     </div>
 
@@ -250,22 +250,14 @@
         </div>
     </div>
 
-    <!-- Remaining Sections -->
-    <div class="section" id="section3">
-        <img src="https://your-image-link.com/green-line-failures.jpg" alt="Green Line Challenges">
-        <div class="text-box">
-            <p>But why? “The Green Line runs on headway management rather than a strict schedule,” Kaplan explains. Unlike other lines that dispatch trains at specific times, the Green Line releases trains at intervals, adjusting for delays. “It avoids bunching, but it also means more variance,” he says. This variability exacerbates congestion, leaving riders guessing when a train will arrive.</p>
-        </div>
-    </div>
-
     <div class="section" id="section4">
         <img src="IMG_9675.png">
         <div class="text-box">
-            <p>It is also important to note that stations like Copley, Arlington, and North Station have multiple lines (B, C, D, E) that travel through the station, so these times do not accurately reflect the time you would be waiting depending on where you are going. But according to the MBTA, the green line ranks lowest in percentage pfaccurate predictions, with all 4 scoring below 73% accurate.</p>
+            <p>It is also important to note that stations like Copley, Arlington, and North Station have multiple lines (B, C, D, E) that travel through the station, so these times do not accurately reflect the time you would be waiting depending on where you are going. But according to the MBTA, the green line ranks lowest in percentage of accurate predictions, with all 4 scoring below 73% accurate.</p>
         </div>
     </div>
-    
-<!-- Percent Accuracy Chart Section -->
+
+    <!-- Percent Accuracy Chart Section -->
     <div class="section" id="accuracy-chart-section">
         <div class="text-box">
             <h2>Percentage Accuracy of Prediction Across Different MBTA Lines</h2>
@@ -381,17 +373,37 @@
     });
 </script>
 
-    <div class="section" id="section5">
+     <div class="section" id="section5">
         <img src="IMG_6944.png">
         <div class="text-box">
             <p>The MBTA says: "We consider a prediction to be accurate when a train or bus arrives within minutes of a prediction. The exact number of minutes depends on how far out into the future a prediction is." Even as the data reveals critical flaws, it also highlights the limitations of the MBTA’s current metrics. Above-ground stops on the B, C, and E Lines are unmeasured due to outdated onboard payment systems. Additionally, gated entries represent only passengers entering the Green Line system—they do not account for direction. Approximately half of these riders are traveling eastbound (inbound) and the other half westbound (outbound).</p>
         </div>
     </div>
 
+    <div class="section" id="section3">
+        <img src="https://your-image-link.com/green-line-failures.jpg" alt="Green Line Challenges">
+        <div class="text-box">
+            <p> Multiple questions arise. Why are trains not coming on time? Shouldn't more trains service the increase of riders during rush hour? “The Green Line runs on headway management rather than a strict schedule,” Kaplan explains. "Unlike other lines that dispatch trains at specific times, the Green Line releases trains at intervals, adjusting for delays. It avoids bunching, but this also means more variance in times." </p>
+        </div>
+    </div>
+
+    <div class="section" id="section6">
+        <img src="IMG_2242.png">
+        <div class="text-box">
+            <p>Delays as a result of disabeled trains are a large part of the problem the Green Line is currently facing. The MBTA currently tweets when a line is delayed or down, and through looking at tweets from the month of September, 43% of all tweets indicating a Green Line delay of at least 10 minutes, were because of a disabled train. Take a look at the WordCloud below: </p>
+        </div>
+    </div>
+
+    <div class="section" id="section6">
+         <div class="text-box">
+         <img src="IMG_2242.png">
+         </div>
+    </div>
+
     <div class="section" id="section6">
         <img src="IMG_2207.png">
         <div class="text-box">
-            <p>Above-ground stops compound the problem. Outdated fare systems prevent accurate ridership data collection, leaving the MBTA blind to significant portions of Green Line usage. These gaps highlight the Green Line’s dual failures: meeting rider demand and accurately capturing the system’s scope.</p>
+            <p>.Out-dated trains causing significant delays are rubbing salt into the wound that is the congestion problem on Boston's transit system. The MBTA cannot continue to put bandaids on the gapping wounds that exist on the T.</p>
         </div>
     </div>
 
@@ -405,7 +417,7 @@
     <div class="section" id="section10">
         <img src="https://raw.githubusercontent.com/mcmosso/mbta-project/main/GL-Option-3-1.jpg" alt="New Green Line Train">
         <div class="text-box">
-            <p>The MBTA promises relief with new Type 10 Green Line trains set to debut by 2027. These larger, more accessible cars will increase capacity by nearly 30%, a much-needed improvement. However, systemic issues like signal problems and power failures remain significant barriers. “Fixing all the signal and power issues would transform the Green Line overnight,” Kaplan says, pointing to the nearly 40 hours of delays caused by disabled trains this year alone, and about 5 hours of those 40 come just from the Green Line in the month of September. Most of these delays are caused by disabled trains.</p>
+            <p>The MBTA promises relief with new Type 10 Green Line trains set to debut by 2027. These larger, more accessible cars will increase capacity by nearly 30%, a much-needed improvement. However, systemic issues like signal problems and power failures remain significant barriers, and if the new trains are not the answer to these problems, the Green Line will only improve minimally. “Fixing all the signal and power issues would transform the Green Line overnight,” says Kaplan.</p>
         </div>
     </div>
 
