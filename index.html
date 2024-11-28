@@ -113,9 +113,27 @@
             window.addEventListener('scroll', handleScroll);
             handleScroll();
         });
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('introAudio');
+
+            audio.currentTime = 0; // Start from the beginning
+            audio.play().catch(error => {
+                console.error('Error playing audio:', error);
+            });
+
+            // Stop playing after 8 seconds
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0; // Reset to the beginning
+            }, 8000);
+        });
     </script>
 </head>
 <body>
+     <audio id="introAudio" preload="auto">
+        <source src="audio/City_Hall_Plaza_8.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
 
     <div class="section" id="section1">
         <img src="IMG_6951.png">
